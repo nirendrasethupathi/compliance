@@ -9,15 +9,15 @@ class CleanBootstrapSeeder extends Seeder
 {
     public function run(): void
     {
-        // Disable foreign key checks (SQLite compatible)
-        DB::statement('PRAGMA foreign_keys = OFF');
+        // Disable foreign key checks (MySQL compatible)
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
         // Clear old data
         DB::table('compliance_forms_master')->truncate();
         DB::table('compliance_sections')->truncate();
 
         // Re-enable foreign key checks
-        DB::statement('PRAGMA foreign_keys = ON');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         // Seed sections
         $sections = [
