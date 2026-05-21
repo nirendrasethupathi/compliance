@@ -412,7 +412,7 @@
             document.getElementById('batch-review-container').innerHTML = html;
         }
 
-        window.showManualDataModal = function showManualDataModal(batchId) {
+        function showManualDataModal(batchId) {
             const existing = document.getElementById('manualDataModal');
             if (existing) existing.remove();
             const modal = document.createElement('div');
@@ -460,7 +460,7 @@
             new bootstrap.Modal(modal).show();
         }
 
-        window.showPdfUploadModal = function showPdfUploadModal(batchId, forms) {
+        function showPdfUploadModal(batchId, forms) {
             const modal = document.createElement('div');
             modal.className = 'modal fade';
             modal.id = 'pdfUploadModal';
@@ -585,7 +585,7 @@
             }
         }
 
-        window.showCsvUploadModal = function showCsvUploadModal(batchId) {
+        function showCsvUploadModal(batchId) {
             // Remove stale modal if re-opened
             document.getElementById('csvUploadModal')?.remove();
 
