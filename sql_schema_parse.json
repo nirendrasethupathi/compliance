@@ -1,0 +1,4932 @@
+{
+  "tables": {
+    "users": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "email_verified_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "password",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "remember_token",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"name\" varchar not null, \"email\" varchar not null, \"email_verified_at\" datetime, \"password\" varchar not null, \"remember_token\" varchar, \"created_at\" datetime, \"updated_at\" datetime"
+    },
+    "password_reset_tokens": {
+      "columns": [
+        {
+          "name": "email",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "token",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"email\" varchar not null, \"token\" varchar not null, \"created_at\" datetime, primary key (\"email\")",
+      "primaryKey": "primary key (\"email\")"
+    },
+    "sessions": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "user_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "ip_address",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "user_agent",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "payload",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "last_activity",
+          "type": "integer",
+          "rest": "not null"
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" varchar not null, \"user_id\" integer, \"ip_address\" varchar, \"user_agent\" text, \"payload\" text not null, \"last_activity\" integer not null, primary key (\"id\")",
+      "primaryKey": "primary key (\"id\")"
+    },
+    "cache": {
+      "columns": [
+        {
+          "name": "key",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "value",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "expiration",
+          "type": "integer",
+          "rest": "not null"
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"key\" varchar not null, \"value\" text not null, \"expiration\" integer not null, primary key (\"key\")",
+      "primaryKey": "primary key (\"key\")"
+    },
+    "cache_locks": {
+      "columns": [
+        {
+          "name": "key",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "owner",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "expiration",
+          "type": "integer",
+          "rest": "not null"
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"key\" varchar not null, \"owner\" varchar not null, \"expiration\" integer not null, primary key (\"key\")",
+      "primaryKey": "primary key (\"key\")"
+    },
+    "jobs": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "queue",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "payload",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "attempts",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "reserved_at",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "available_at",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "integer",
+          "rest": "not null"
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"queue\" varchar not null, \"payload\" text not null, \"attempts\" integer not null, \"reserved_at\" integer, \"available_at\" integer not null, \"created_at\" integer not null"
+    },
+    "job_batches": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "total_jobs",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "pending_jobs",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "failed_jobs",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "failed_job_ids",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "options",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "cancelled_at",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "finished_at",
+          "type": "integer",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" varchar not null, \"name\" varchar not null, \"total_jobs\" integer not null, \"pending_jobs\" integer not null, \"failed_jobs\" integer not null, \"failed_job_ids\" text not null, \"options\" text, \"cancelled_at\" integer, \"created_at\" integer not null, \"finished_at\" integer, primary key (\"id\")",
+      "primaryKey": "primary key (\"id\")"
+    },
+    "failed_jobs": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "uuid",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "connection",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "queue",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "payload",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "exception",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "failed_at",
+          "type": "datetime",
+          "rest": "not null default CURRENT_TIMESTAMP"
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"uuid\" varchar not null, \"connection\" text not null, \"queue\" text not null, \"payload\" text not null, \"exception\" text not null, \"failed_at\" datetime not null default CURRENT_TIMESTAMP"
+    },
+    "tenants": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"name\" varchar not null, \"created_at\" datetime, \"updated_at\" datetime"
+    },
+    "branches": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "unit_name",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "factory_license_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "pf_code",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "esi_code",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_name\" varchar not null, \"unit_name\" varchar, \"factory_license_number\" varchar, \"address\" text, \"pf_code\" varchar, \"esi_code\" varchar, \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade"
+    },
+    "workforce_employee": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "employee_code",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "pf_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "esi_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "date_of_joining",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "designation",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "department",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "basic_salary",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'active'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "set"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer, \"employee_code\" varchar not null, \"name\" varchar not null, \"pf_number\" varchar, \"esi_number\" varchar, \"date_of_joining\" date not null, \"designation\" varchar, \"department\" varchar, \"basic_salary\" numeric not null default '0', \"status\" varchar not null default 'active', \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete set null"
+    },
+    "payroll_cycles": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "cycle_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "processed_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'pending'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"cycle_name\" varchar not null, \"period_from\" date not null, \"period_to\" date not null, \"processed_at\" datetime, \"status\" varchar not null default 'pending', \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade"
+    },
+    "payroll_settings": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "pf_rate",
+          "type": "numeric",
+          "rest": "not null default '12'"
+        },
+        {
+          "name": "esi_rate",
+          "type": "numeric",
+          "rest": "not null default '0.75'"
+        },
+        {
+          "name": "ot_multiplier",
+          "type": "numeric",
+          "rest": "not null default '2'"
+        },
+        {
+          "name": "bonus_min_percent",
+          "type": "numeric",
+          "rest": "not null default '8.33'"
+        },
+        {
+          "name": "bonus_max_percent",
+          "type": "numeric",
+          "rest": "not null default '20'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"pf_rate\" numeric not null default '12', \"esi_rate\" numeric not null default '0.75', \"ot_multiplier\" numeric not null default '2', \"bonus_min_percent\" numeric not null default '8.33', \"bonus_max_percent\" numeric not null default '20', \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade"
+    },
+    "payroll_entries": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "payroll_cycle_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "total_days_worked",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "paid_leave_days",
+          "type": "integer",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "unpaid_leave_days",
+          "type": "integer",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "overtime_hours",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "basic_earned",
+          "type": "numeric",
+          "rest": "not null"
+        },
+        {
+          "name": "da_earned",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "hra_earned",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "other_allowances",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "overtime_wages",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "gross_salary",
+          "type": "numeric",
+          "rest": "not null"
+        },
+        {
+          "name": "pf_employee",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "esi_employee",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "professional_tax",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "fines",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "advances",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "other_deductions",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "total_deductions",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "net_salary",
+          "type": "numeric",
+          "rest": "not null"
+        },
+        {
+          "name": "payment_date",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "payment_mode",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "transaction_reference",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "set"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "payroll_cycle_id",
+          "references": "id",
+          "on": "payroll_cycles",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer, \"employee_id\" integer not null, \"payroll_cycle_id\" integer not null, \"total_days_worked\" integer not null, \"paid_leave_days\" integer not null default '0', \"unpaid_leave_days\" integer not null default '0', \"overtime_hours\" numeric not null default '0', \"basic_earned\" numeric not null, \"da_earned\" numeric not null default '0', \"hra_earned\" numeric not null default '0', \"other_allowances\" numeric not null default '0', \"overtime_wages\" numeric not null default '0', \"gross_salary\" numeric not null, \"pf_employee\" numeric not null default '0', \"esi_employee\" numeric not null default '0', \"professional_tax\" numeric not null default '0', \"fines\" numeric not null default '0', \"advances\" numeric not null default '0', \"other_deductions\" numeric not null default '0', \"total_deductions\" numeric not null default '0', \"net_salary\" numeric not null, \"payment_date\" date, \"payment_mode\" varchar, \"transaction_reference\" varchar, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete set null, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade, foreign key(\"payroll_cycle_id\") references \"payroll_cycles\"(\"id\") on delete cascade"
+    },
+    "bonus_records": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "financial_year",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "bonus_percentage",
+          "type": "numeric",
+          "rest": "not null"
+        },
+        {
+          "name": "bonus_amount",
+          "type": "numeric",
+          "rest": "not null"
+        },
+        {
+          "name": "payment_date",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "set"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer, \"employee_id\" integer not null, \"financial_year\" varchar not null, \"bonus_percentage\" numeric not null, \"bonus_amount\" numeric not null, \"payment_date\" date, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete set null, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade"
+    },
+    "contractor_compliance": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "contractor_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "clra_license_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "license_valid_from",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "license_valid_to",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "pf_code",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "esi_code",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "labour_registration_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "last_return_filed",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "is_compliant",
+          "type": "tinyint",
+          "rest": "(1) not null default '1'"
+        },
+        {
+          "name": "compliance_notes",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "contractor_id",
+          "references": "id",
+          "on": "contractor_master",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"contractor_id\" integer not null, \"branch_id\" integer, \"clra_license_number\" varchar, \"license_valid_from\" date, \"license_valid_to\" date, \"max_worker_limit\" integer, \"pf_code\" varchar, \"esi_code\" varchar, \"labour_registration_number\" varchar, \"last_return_filed\" date, \"is_compliant\" tinyint(1) not null default '1', \"compliance_notes\" text, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"contractor_id\") references \"contractor_master\"(\"id\") on delete cascade"
+    },
+    "contractor_master": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "company_type",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "company_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "contractor_code",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "contractor_name",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "license_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "valid_from",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "valid_to",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "company_address",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "contact_person",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "contact_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "phone",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "email",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "pan_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "gst_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "license_no",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "license_expiry",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'active'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer, \"company_type\" varchar, \"company_name\" varchar not null, \"contractor_code\" varchar, \"contractor_name\" varchar, \"license_number\" varchar, \"valid_from\" date, \"valid_to\" date, \"max_worker_limit\" integer not null default '0', \"company_address\" varchar, \"address\" text, \"contact_person\" varchar, \"contact_number\" varchar, \"phone\" varchar, \"email\" varchar, \"pan_number\" varchar, \"gst_number\" varchar, \"license_no\" varchar, \"license_expiry\" date, \"status\" varchar not null default 'active', \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade"
+    },
+    "contractors": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "contractor_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "license_number",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "valid_from",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "valid_to",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "pf_code",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "esi_code",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"contractor_name\" varchar not null, \"license_number\" varchar not null, \"valid_from\" date not null, \"valid_to\" date not null, \"max_worker_limit\" integer not null, \"pf_code\" varchar, \"esi_code\" varchar, \"created_at\" datetime, \"updated_at\" datetime"
+    },
+    "contract_labour_deployment": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "contractor_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "contractor_compliance_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "wage_rate",
+          "type": "numeric",
+          "rest": "not null"
+        },
+        {
+          "name": "deployment_start",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "deployment_end",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "work_order_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "work_order_date",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'active'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer, \"contractor_id\" integer, \"contractor_compliance_id\" integer, \"employee_id\" integer not null, \"wage_rate\" numeric not null, \"deployment_start\" date not null, \"deployment_end\" date, \"work_order_number\" varchar, \"work_order_date\" date, \"status\" varchar not null default 'active', \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade"
+    },
+    "clra_returns": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "return_type",
+          "type": "varchar",
+          "rest": "check (\"return_type\" in ('half_yearly', 'annual')) not null"
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "total_workers",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "total_wages",
+          "type": "numeric",
+          "rest": "not null"
+        },
+        {
+          "name": "total_ot",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "total_deductions",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"return_type\" varchar check (\"return_type\" in ('half_yearly', 'annual')) not null, \"period_from\" date not null, \"period_to\" date not null, \"total_workers\" integer not null, \"total_wages\" numeric not null, \"total_ot\" numeric not null default '0', \"total_deductions\" numeric not null default '0', \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade"
+    },
+    "contract_labour": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "contractor_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "deployment_location",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "wage_rate",
+          "type": "numeric",
+          "rest": "not null"
+        },
+        {
+          "name": "employment_start",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "employment_end",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "contractor_id",
+          "references": "id",
+          "on": "contractors",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"contractor_id\" integer not null, \"employee_id\" integer not null, \"deployment_location\" varchar, \"wage_rate\" numeric not null, \"employment_start\" date not null, \"employment_end\" date, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"contractor_id\") references \"contractors\"(\"id\") on delete cascade, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade"
+    },
+    "incident_documents": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "incident_type",
+          "type": "varchar",
+          "rest": "check (\"incident_type\" in ('accident', 'serious', 'dangerous', 'esi')) not null"
+        },
+        {
+          "name": "incident_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "location",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "authority_name",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "reference_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "document_path",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "uploaded_by",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "uploaded_at",
+          "type": "datetime",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "uploaded_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"employee_id\" integer, \"incident_type\" varchar check (\"incident_type\" in ('accident', 'serious', 'dangerous', 'esi')) not null, \"incident_date\" date not null, \"location\" varchar, \"description\" text, \"authority_name\" varchar, \"reference_number\" varchar, \"document_path\" varchar not null, \"uploaded_by\" integer not null, \"uploaded_at\" datetime not null, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade, foreign key(\"uploaded_by\") references \"users\"(\"id\") on delete cascade"
+    },
+    "workforce_attendance": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "attendance_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "check (\"status\" in ('present', 'absent', 'leave', 'holiday')) not null default 'present'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"employee_id\" integer not null, \"attendance_date\" date not null, \"status\" varchar check (\"status\" in ('present', 'absent', 'leave', 'holiday')) not null default 'present', \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade"
+    },
+    "compliance_execution_batches": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "section_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "period_month",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "period_year",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "form_ids",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'pending'"
+        },
+        {
+          "name": "created_by",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "processed_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "results",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "generated_report_path",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"section_id\" integer not null, \"period_from\" date not null, \"period_to\" date not null, \"period_month\" integer, \"period_year\" integer, \"form_ids\" text not null, \"branch_id\" integer, \"status\" varchar not null default 'pending', \"created_by\" integer, \"processed_at\" datetime, \"results\" text, \"generated_report_path\" varchar, \"created_at\" datetime, \"updated_at\" datetime"
+    },
+    "incidents": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "incident_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "description",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "severity",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"incident_date\" date not null, \"description\" varchar, \"severity\" varchar, \"status\" varchar, \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete cascade"
+    },
+    "inspection_documents": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "inspection_type",
+          "type": "varchar",
+          "rest": "check (\"inspection_type\" in ('epf', 'esi', 'labour', 'factory')) not null"
+        },
+        {
+          "name": "inspection_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "inspecting_authority",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "reference_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "document_path",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "uploaded_by",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "uploaded_at",
+          "type": "datetime",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "uploaded_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"inspection_type\" varchar check (\"inspection_type\" in ('epf', 'esi', 'labour', 'factory')) not null, \"inspection_date\" date not null, \"inspecting_authority\" varchar, \"reference_number\" varchar, \"document_path\" varchar not null, \"remarks\" text, \"uploaded_by\" integer not null, \"uploaded_at\" datetime not null, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"uploaded_by\") references \"users\"(\"id\") on delete cascade"
+    },
+    "compliance_execution_logs": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "batch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_code",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "check (\"status\" in ('pending', 'processing', 'success', 'failed', 'preview')) not null default 'pending'"
+        },
+        {
+          "name": "execution_time",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "records_generated",
+          "type": "integer",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "error_message",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "execution_mode",
+          "type": "varchar",
+          "rest": "not null default 'batch'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "batch_id",
+          "references": "id",
+          "on": "compliance_execution_batches",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"batch_id\" integer not null, \"form_code\" varchar not null, \"status\" varchar check (\"status\" in ('pending', 'processing', 'success', 'failed', 'preview')) not null default 'pending', \"execution_time\" integer, \"records_generated\" integer not null default '0', \"error_message\" text, \"execution_mode\" varchar not null default 'batch', \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete cascade, foreign key(\"batch_id\") references \"compliance_execution_batches\"(\"id\") on delete cascade"
+    },
+    "compliance_forms": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_code",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "frequency_type",
+          "type": "varchar",
+          "rest": "check (\"frequency_type\" in ('monthly', 'annual', 'event', 'inspection')) not null"
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "generated_by",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "generated_at",
+          "type": "datetime",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "generated_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"form_code\" varchar not null, \"period_from\" date, \"period_to\" date, \"frequency_type\" varchar check (\"frequency_type\" in ('monthly', 'annual', 'event', 'inspection')) not null, \"file_path\" varchar not null, \"generated_by\" integer not null, \"generated_at\" datetime not null, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"generated_by\") references \"users\"(\"id\") on delete cascade"
+    },
+    "compliance_forms_master": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "form_code",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "form_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "act_type",
+          "type": "varchar",
+          "rest": "check (\"act_type\" in ('Factories', 'CLRA', 'Shops', 'EPF', 'ESI')) not null"
+        },
+        {
+          "name": "frequency",
+          "type": "varchar",
+          "rest": "check (\"frequency\" in ('Monthly', 'Annual', 'HalfYearly', 'Event')) not null"
+        },
+        {
+          "name": "priority",
+          "type": "varchar",
+          "rest": "check (\"priority\" in ('High', 'Medium', 'Low')) not null default 'Medium'"
+        },
+        {
+          "name": "auto_generate",
+          "type": "tinyint",
+          "rest": "(1) not null default '0'"
+        },
+        {
+          "name": "upload_only",
+          "type": "tinyint",
+          "rest": "(1) not null default '0'"
+        },
+        {
+          "name": "is_active",
+          "type": "tinyint",
+          "rest": "(1) not null default '1'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"form_code\" varchar not null, \"form_name\" varchar not null, \"act_type\" varchar check (\"act_type\" in ('Factories', 'CLRA', 'Shops', 'EPF', 'ESI')) not null, \"frequency\" varchar check (\"frequency\" in ('Monthly', 'Annual', 'HalfYearly', 'Event')) not null, \"priority\" varchar check (\"priority\" in ('High', 'Medium', 'Low')) not null default 'Medium', \"auto_generate\" tinyint(1) not null default '0', \"upload_only\" tinyint(1) not null default '0', \"is_active\" tinyint(1) not null default '1', \"created_at\" datetime, \"updated_at\" datetime"
+    },
+    "compliance_status": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "form_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "check (\"status\" in ('Pending', 'Generated', 'Uploaded', 'NIL', 'Locked')) not null default 'Pending'"
+        },
+        {
+          "name": "generated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "uploaded_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "approved_by",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "approved_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "approved_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "set"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer, \"form_id\" integer not null, \"period_from\" date not null, \"period_to\" date not null, \"status\" varchar check (\"status\" in ('Pending', 'Generated', 'Uploaded', 'NIL', 'Locked')) not null default 'Pending', \"generated_at\" datetime, \"uploaded_at\" datetime, \"approved_by\" integer, \"approved_at\" datetime, \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"form_id\") references \"compliance_forms_master\"(\"id\") on delete cascade, foreign key(\"approved_by\") references \"users\"(\"id\") on delete set null"
+    },
+    "compliance_generation_logs": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "compliance_status_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "generated_by",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "checksum_hash",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "ip_address",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "user_agent",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "compliance_status_id",
+          "references": "id",
+          "on": "compliance_status",
+          "onDelete": "set"
+        },
+        {
+          "column": "generated_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"form_id\" integer not null, \"compliance_status_id\" integer, \"generated_by\" integer not null, \"file_path\" varchar, \"checksum_hash\" varchar, \"ip_address\" varchar not null, \"user_agent\" text not null, \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"form_id\") references \"compliance_forms_master\"(\"id\") on delete cascade, foreign key(\"compliance_status_id\") references \"compliance_status\"(\"id\") on delete set null, foreign key(\"generated_by\") references \"users\"(\"id\") on delete cascade"
+    },
+    "compliance_reminders": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "reminder_type",
+          "type": "varchar",
+          "rest": "check (\"reminder_type\" in ('Monthly', 'Annual', 'Expiry', 'Event')) not null"
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "reminder_sent_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "check (\"status\" in ('Pending', 'Sent', 'Skipped')) not null default 'Pending'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"form_id\" integer not null, \"reminder_type\" varchar check (\"reminder_type\" in ('Monthly', 'Annual', 'Expiry', 'Event')) not null, \"due_date\" date not null, \"reminder_sent_at\" datetime, \"status\" varchar check (\"status\" in ('Pending', 'Sent', 'Skipped')) not null default 'Pending', \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"form_id\") references \"compliance_forms_master\"(\"id\") on delete cascade"
+    },
+    "compliance_attachments": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "compliance_status_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "uploaded_by",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "reference_number",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": "not null"
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "compliance_status_id",
+          "references": "id",
+          "on": "compliance_status",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "uploaded_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"form_id\" integer not null, \"compliance_status_id\" integer not null, \"uploaded_by\" integer not null, \"file_path\" varchar not null, \"reference_number\" varchar, \"remarks\" text, \"created_at\" datetime not null, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"form_id\") references \"compliance_forms_master\"(\"id\") on delete cascade, foreign key(\"compliance_status_id\") references \"compliance_status\"(\"id\") on delete cascade, foreign key(\"uploaded_by\") references \"users\"(\"id\") on delete cascade"
+    },
+    "__temp__compliance_status": {
+      "columns": [
+        {
+          "name": "version_number",
+          "type": "integer",
+          "rest": "not null default '1'"
+        },
+        {
+          "name": "is_revised",
+          "type": "tinyint",
+          "rest": "(1) not null default '0'"
+        },
+        {
+          "name": "revised_from_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "revision_reason",
+          "type": "text",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "revised_from_id",
+          "references": "id",
+          "on": "compliance_status",
+          "onDelete": "set"
+        }
+      ],
+      "checks": [],
+      "raw": "\"version_number\" integer not null default '1', \"is_revised\" tinyint(1) not null default '0', \"revised_from_id\" integer, \"revision_reason\" text, foreign key(\"revised_from_id\") references \"compliance_status\"(\"id\") on delete set null"
+    },
+    "compliance_form_sources": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "form_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "source_table",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "source_type",
+          "type": "varchar",
+          "rest": "check (\"source_type\" in ('Payroll', 'Attendance', 'CLRA', 'Upload')) not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"form_id\" integer not null, \"source_table\" varchar not null, \"source_type\" varchar check (\"source_type\" in ('Payroll', 'Attendance', 'CLRA', 'Upload')) not null, \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"form_id\") references \"compliance_forms_master\"(\"id\") on delete cascade"
+    },
+    "compliance_sections": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "section_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "section_code",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "is_active",
+          "type": "tinyint",
+          "rest": "(1) not null default '1'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"section_name\" varchar not null, \"section_code\" varchar not null, \"is_active\" tinyint(1) not null default '1', \"created_at\" datetime, \"updated_at\" datetime"
+    },
+    "compliance_signatures": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_code",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "batch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "signed_by_user_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "signatory_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "signatory_designation",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "signature_type",
+          "type": "varchar",
+          "rest": "check (\"signature_type\" in ('DRAWN', 'IMAGE', 'DIGITAL_CERT')) not null"
+        },
+        {
+          "name": "signature_path",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "signature_hash",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "document_hash",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "ip_address",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "signed_at",
+          "type": "datetime",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"form_code\" varchar not null, \"batch_id\" integer not null, \"signed_by_user_id\" integer not null, \"signatory_name\" varchar not null, \"signatory_designation\" varchar not null, \"signature_type\" varchar check (\"signature_type\" in ('DRAWN', 'IMAGE', 'DIGITAL_CERT')) not null, \"signature_path\" varchar, \"signature_hash\" varchar not null, \"document_hash\" varchar not null, \"ip_address\" varchar not null, \"signed_at\" datetime not null, \"created_at\" datetime, \"updated_at\" datetime"
+    },
+    "compliance_audit_logs": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "user_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "action",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "form_code",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "batch_id",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "ip_address",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "user_agent",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "metadata",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": "not null"
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"user_id\" integer, \"action\" varchar not null, \"form_code\" varchar, \"batch_id\" integer, \"ip_address\" varchar not null, \"user_agent\" text, \"metadata\" text, \"created_at\" datetime not null"
+    },
+    "compliance_timelines": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_master_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "period_month",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "period_year",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "check (\"status\" in ('Pending', 'Generated', 'Filed', 'Overdue')) not null default 'Pending'"
+        },
+        {
+          "name": "reminder_sent",
+          "type": "tinyint",
+          "rest": "(1) not null default '0'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "form_master_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"form_master_id\" integer not null, \"period_month\" integer not null, \"period_year\" integer not null, \"due_date\" date not null, \"status\" varchar check (\"status\" in ('Pending', 'Generated', 'Filed', 'Overdue')) not null default 'Pending', \"reminder_sent\" tinyint(1) not null default '0', \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"form_master_id\") references \"compliance_forms_master\"(\"id\") on delete cascade"
+    },
+    "compliance_manual_uploads": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "user_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "batch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_code",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "uploaded_at",
+          "type": "datetime",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "user_id",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "batch_id",
+          "references": "id",
+          "on": "compliance_execution_batches",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"user_id\" integer not null, \"batch_id\" integer not null, \"form_code\" varchar not null, \"file_path\" varchar not null, \"uploaded_at\" datetime not null, \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"user_id\") references \"users\"(\"id\") on delete cascade, foreign key(\"batch_id\") references \"compliance_execution_batches\"(\"id\") on delete cascade"
+    },
+    "statutory_manual_data": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "month",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "year",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "establishment_details",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "employer_details",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "employee_summary",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "wage_summary",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "attendance_summary",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "accident_details",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "contractor_summary",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"month\" integer not null, \"year\" integer not null, \"establishment_details\" text, \"employer_details\" text, \"employee_summary\" text, \"wage_summary\" text, \"attendance_summary\" text, \"accident_details\" text, \"contractor_summary\" text, \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade"
+    },
+    "compliance_batch_forms": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "batch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_code",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "section",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "file_path",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'success'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": "not null"
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"batch_id\" integer not null, \"form_code\" varchar not null, \"section\" varchar not null, \"file_path\" varchar not null, \"status\" varchar not null default 'success', \"created_at\" datetime not null"
+    },
+    "compliance_form_audit_scores": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "batch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "form_code",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "audit_score",
+          "type": "integer",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'pending'"
+        },
+        {
+          "name": "violations",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"batch_id\" integer not null, \"form_code\" varchar not null, \"audit_score\" integer not null default '0', \"status\" varchar not null default 'pending', \"violations\" text, \"created_at\" datetime, \"updated_at\" datetime"
+    },
+    "__temp__compliance_batch_forms": {
+      "columns": [],
+      "foreigns": [],
+      "checks": [],
+      "raw": ""
+    },
+    "telescope_entries": {
+      "columns": [
+        {
+          "name": "sequence",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "uuid",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "batch_id",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "family_hash",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "should_display_on_index",
+          "type": "tinyint",
+          "rest": "(1) not null default '1'"
+        },
+        {
+          "name": "type",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"sequence\" integer primary key autoincrement not null, \"uuid\" varchar not null, \"batch_id\" varchar not null, \"family_hash\" varchar, \"should_display_on_index\" tinyint(1) not null default '1', \"type\" varchar not null, \"content\" text not null, \"created_at\" datetime"
+    },
+    "telescope_entries_tags": {
+      "columns": [
+        {
+          "name": "entry_uuid",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "tag",
+          "type": "varchar",
+          "rest": "not null"
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "entry_uuid",
+          "references": "uuid",
+          "on": "telescope_entries",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"entry_uuid\" varchar not null, \"tag\" varchar not null, foreign key(\"entry_uuid\") references \"telescope_entries\"(\"uuid\") on delete cascade, primary key (\"entry_uuid\", \"tag\")",
+      "primaryKey": "primary key (\"entry_uuid\", \"tag\")"
+    },
+    "telescope_monitoring": {
+      "columns": [
+        {
+          "name": "tag",
+          "type": "varchar",
+          "rest": "not null"
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"tag\" varchar not null, primary key (\"tag\")",
+      "primaryKey": "primary key (\"tag\")"
+    },
+    "workforce_deductions": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "deduction_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "particulars",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "showed_cause",
+          "type": "tinyint",
+          "rest": "(1) not null default '0'"
+        },
+        {
+          "name": "witness_name",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "amount",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "num_instalments",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "first_month",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "last_month",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"employee_id\" integer not null, \"deduction_date\" date not null, \"particulars\" varchar, \"showed_cause\" tinyint(1) not null default '0', \"witness_name\" varchar, \"amount\" numeric not null default '0', \"num_instalments\" integer, \"first_month\" varchar, \"last_month\" varchar, \"remarks\" text, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete cascade, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade"
+    },
+    "workforce_fines": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "fine_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "reason",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "amount",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"employee_id\" integer not null, \"fine_date\" date not null, \"reason\" varchar, \"amount\" numeric not null default '0', \"remarks\" text, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete cascade, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade"
+    },
+    "workforce_advances": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "advance_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "amount",
+          "type": "numeric",
+          "rest": "not null default '0'"
+        },
+        {
+          "name": "num_instalments",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "first_month",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "last_month",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"employee_id\" integer not null, \"advance_date\" date not null, \"amount\" numeric not null default '0', \"num_instalments\" integer, \"first_month\" varchar, \"last_month\" varchar, \"remarks\" text, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete cascade, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade"
+    },
+    "employee_leave": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "leave_from",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "leave_to",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "leave_type",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "days",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'approved'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"employee_id\" integer not null, \"leave_from\" date not null, \"leave_to\" date not null, \"leave_type\" varchar not null, \"days\" integer not null, \"reason\" text, \"status\" varchar not null default 'approved', \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete cascade, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade"
+    },
+    "holidays": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "holiday_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "holiday_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "holiday_type",
+          "type": "varchar",
+          "rest": "not null default 'national'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"holiday_date\" date not null, \"holiday_name\" varchar not null, \"holiday_type\" varchar not null default 'national', \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete cascade"
+    },
+    "hazard_register": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "hazard_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "hazard_type",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "rest": "not null"
+        },
+        {
+          "name": "location",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "severity",
+          "type": "varchar",
+          "rest": "not null default 'medium'"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'open'"
+        },
+        {
+          "name": "corrective_action",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "action_date",
+          "type": "date",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"hazard_date\" date not null, \"hazard_type\" varchar not null, \"description\" text not null, \"location\" varchar not null, \"severity\" varchar not null default 'medium', \"status\" varchar not null default 'open', \"corrective_action\" text, \"action_date\" date, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete cascade"
+    },
+    "employee_financial_register": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "employee_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "transaction_type",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "amount",
+          "type": "numeric",
+          "rest": "not null"
+        },
+        {
+          "name": "transaction_date",
+          "type": "date",
+          "rest": "not null"
+        },
+        {
+          "name": "reason",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "not null default 'active'"
+        },
+        {
+          "name": "installments",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "installment_amount",
+          "type": "numeric",
+          "rest": ""
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "deleted_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"employee_id\" integer not null, \"transaction_type\" varchar not null, \"amount\" numeric not null, \"transaction_date\" date not null, \"reason\" varchar not null, \"status\" varchar not null default 'active', \"installments\" integer, \"installment_amount\" numeric, \"remarks\" text, \"created_at\" datetime, \"updated_at\" datetime, \"deleted_at\" datetime, foreign key(\"tenant_id\") references \"tenants\"(\"id\") on delete cascade, foreign key(\"branch_id\") references \"branches\"(\"id\") on delete cascade, foreign key(\"employee_id\") references \"workforce_employee\"(\"id\") on delete cascade"
+    },
+    "compliance_manual_master": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "compliance_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "act_name",
+          "type": "varchar",
+          "rest": "not null"
+        },
+        {
+          "name": "frequency",
+          "type": "varchar",
+          "rest": "check (\"frequency\" in ('monthly', 'quarterly', 'half_yearly', 'annual', 'event')) not null"
+        },
+        {
+          "name": "due_month",
+          "type": "integer",
+          "rest": ""
+        },
+        {
+          "name": "requires_document",
+          "type": "tinyint",
+          "rest": "(1) not null default '1'"
+        },
+        {
+          "name": "is_event_based",
+          "type": "tinyint",
+          "rest": "(1) not null default '0'"
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"compliance_name\" varchar not null, \"act_name\" varchar not null, \"frequency\" varchar check (\"frequency\" in ('monthly', 'quarterly', 'half_yearly', 'annual', 'event')) not null, \"due_month\" integer, \"requires_document\" tinyint(1) not null default '1', \"is_event_based\" tinyint(1) not null default '0', \"created_at\" datetime, \"updated_at\" datetime"
+    },
+    "compliance_manual_batch_items": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "rest": "primary key autoincrement not null"
+        },
+        {
+          "name": "batch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "tenant_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "branch_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "compliance_id",
+          "type": "integer",
+          "rest": "not null"
+        },
+        {
+          "name": "status",
+          "type": "varchar",
+          "rest": "check (\"status\" in ('pending', 'uploaded', 'skipped')) not null default 'pending'"
+        },
+        {
+          "name": "document_path",
+          "type": "varchar",
+          "rest": ""
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "rest": ""
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "updated_at",
+          "type": "datetime",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "batch_id",
+          "references": "id",
+          "on": "compliance_execution_batches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "compliance_id",
+          "references": "id",
+          "on": "compliance_manual_master",
+          "onDelete": "cascade"
+        }
+      ],
+      "checks": [],
+      "raw": "\"id\" integer primary key autoincrement not null, \"batch_id\" integer not null, \"tenant_id\" integer not null, \"branch_id\" integer not null, \"compliance_id\" integer not null, \"status\" varchar check (\"status\" in ('pending', 'uploaded', 'skipped')) not null default 'pending', \"document_path\" varchar, \"remarks\" text, \"created_at\" datetime, \"updated_at\" datetime, foreign key(\"batch_id\") references \"compliance_execution_batches\"(\"id\") on delete cascade, foreign key(\"compliance_id\") references \"compliance_manual_master\"(\"id\") on delete cascade"
+    },
+    "__temp__compliance_manual_batch_items": {
+      "columns": [
+        {
+          "name": "compliance_result",
+          "type": "varchar",
+          "rest": "check (\"compliance_result\" in ('compliant', 'not_applicable'))"
+        },
+        {
+          "name": "uploaded_at",
+          "type": "datetime",
+          "rest": ""
+        },
+        {
+          "name": "uploaded_by",
+          "type": "integer",
+          "rest": ""
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "uploaded_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "set"
+        }
+      ],
+      "checks": [],
+      "raw": "\"compliance_result\" varchar check (\"compliance_result\" in ('compliant', 'not_applicable')), \"uploaded_at\" datetime, \"uploaded_by\" integer, foreign key(\"uploaded_by\") references \"users\"(\"id\") on delete set null"
+    }
+  },
+  "indexes": [
+    {
+      "table": "users",
+      "name": "users_email_unique",
+      "unique": true,
+      "columns": [
+        "email"
+      ]
+    },
+    {
+      "table": "sessions",
+      "name": "sessions_user_id_index",
+      "unique": false,
+      "columns": [
+        "user_id"
+      ]
+    },
+    {
+      "table": "sessions",
+      "name": "sessions_last_activity_index",
+      "unique": false,
+      "columns": [
+        "last_activity"
+      ]
+    },
+    {
+      "table": "cache",
+      "name": "cache_expiration_index",
+      "unique": false,
+      "columns": [
+        "expiration"
+      ]
+    },
+    {
+      "table": "cache_locks",
+      "name": "cache_locks_expiration_index",
+      "unique": false,
+      "columns": [
+        "expiration"
+      ]
+    },
+    {
+      "table": "jobs",
+      "name": "jobs_queue_index",
+      "unique": false,
+      "columns": [
+        "queue"
+      ]
+    },
+    {
+      "table": "failed_jobs",
+      "name": "failed_jobs_uuid_unique",
+      "unique": true,
+      "columns": [
+        "uuid"
+      ]
+    },
+    {
+      "table": "branches",
+      "name": "branches_tenant_id_branch_name_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_name"
+      ]
+    },
+    {
+      "table": "branches",
+      "name": "branches_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "workforce_employee",
+      "name": "workforce_employee_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "workforce_employee",
+      "name": "workforce_employee_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "workforce_employee",
+      "name": "workforce_employee_employee_code_unique",
+      "unique": true,
+      "columns": [
+        "employee_code"
+      ]
+    },
+    {
+      "table": "payroll_settings",
+      "name": "payroll_settings_tenant_id_unique",
+      "unique": true,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "payroll_entries",
+      "name": "payroll_entries_tenant_id_branch_id_payroll_cycle_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id",
+        "payroll_cycle_id"
+      ]
+    },
+    {
+      "table": "payroll_entries",
+      "name": "payroll_entries_employee_id_payroll_cycle_id_index",
+      "unique": false,
+      "columns": [
+        "employee_id",
+        "payroll_cycle_id"
+      ]
+    },
+    {
+      "table": "payroll_entries",
+      "name": "payroll_entries_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "payroll_entries",
+      "name": "payroll_entries_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "payroll_entries",
+      "name": "payroll_entries_employee_id_index",
+      "unique": false,
+      "columns": [
+        "employee_id"
+      ]
+    },
+    {
+      "table": "payroll_entries",
+      "name": "payroll_entries_payroll_cycle_id_index",
+      "unique": false,
+      "columns": [
+        "payroll_cycle_id"
+      ]
+    },
+    {
+      "table": "bonus_records",
+      "name": "bonus_records_tenant_id_branch_id_financial_year_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id",
+        "financial_year"
+      ]
+    },
+    {
+      "table": "bonus_records",
+      "name": "bonus_records_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "bonus_records",
+      "name": "bonus_records_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "bonus_records",
+      "name": "bonus_records_employee_id_index",
+      "unique": false,
+      "columns": [
+        "employee_id"
+      ]
+    },
+    {
+      "table": "bonus_records",
+      "name": "bonus_records_financial_year_index",
+      "unique": false,
+      "columns": [
+        "financial_year"
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "name": "contractor_compliance_contractor_id_branch_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id",
+        "branch_id"
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "name": "contractor_compliance_contractor_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id"
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "name": "contractor_compliance_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "contractor_master",
+      "name": "contractor_master_tenant_id_company_name_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "company_name"
+      ]
+    },
+    {
+      "table": "contractor_master",
+      "name": "contractor_master_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "contractors",
+      "name": "contractors_tenant_id_license_number_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "license_number"
+      ]
+    },
+    {
+      "table": "contractors",
+      "name": "contractors_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "contractors",
+      "name": "contractors_license_number_index",
+      "unique": false,
+      "columns": [
+        "license_number"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_tenant_id_contractor_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "contractor_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_contractor_id_employee_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id",
+        "employee_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_contractor_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_contractor_compliance_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_compliance_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_employee_id_index",
+      "unique": false,
+      "columns": [
+        "employee_id"
+      ]
+    },
+    {
+      "table": "contractor_master",
+      "name": "contractor_master_tenant_id_company_name_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "company_name"
+      ]
+    },
+    {
+      "table": "contractor_master",
+      "name": "contractor_master_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "name": "contractor_compliance_contractor_id_branch_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id",
+        "branch_id"
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "name": "contractor_compliance_contractor_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id"
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "name": "contractor_compliance_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "clra_returns",
+      "name": "clra_returns_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "clra_returns",
+      "name": "clra_returns_return_type_index",
+      "unique": false,
+      "columns": [
+        "return_type"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_tenant_id_contractor_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "contractor_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_contractor_id_employee_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id",
+        "employee_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_contractor_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_contractor_compliance_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_compliance_id"
+      ]
+    },
+    {
+      "table": "contract_labour_deployment",
+      "name": "contract_labour_deployment_employee_id_index",
+      "unique": false,
+      "columns": [
+        "employee_id"
+      ]
+    },
+    {
+      "table": "contract_labour",
+      "name": "contract_labour_tenant_id_contractor_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "contractor_id"
+      ]
+    },
+    {
+      "table": "contract_labour",
+      "name": "contract_labour_contractor_id_employee_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id",
+        "employee_id"
+      ]
+    },
+    {
+      "table": "contract_labour",
+      "name": "contract_labour_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "contract_labour",
+      "name": "contract_labour_contractor_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id"
+      ]
+    },
+    {
+      "table": "contract_labour",
+      "name": "contract_labour_employee_id_index",
+      "unique": false,
+      "columns": [
+        "employee_id"
+      ]
+    },
+    {
+      "table": "incident_documents",
+      "name": "incident_documents_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "incident_documents",
+      "name": "incident_documents_incident_type_index",
+      "unique": false,
+      "columns": [
+        "incident_type"
+      ]
+    },
+    {
+      "table": "incident_documents",
+      "name": "incident_documents_incident_date_index",
+      "unique": false,
+      "columns": [
+        "incident_date"
+      ]
+    },
+    {
+      "table": "workforce_attendance",
+      "name": "att_unique",
+      "unique": true,
+      "columns": [
+        "tenant_id",
+        "employee_id",
+        "attendance_date"
+      ]
+    },
+    {
+      "table": "workforce_attendance",
+      "name": "workforce_attendance_tenant_id_attendance_date_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "attendance_date"
+      ]
+    },
+    {
+      "table": "workforce_attendance",
+      "name": "workforce_attendance_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "workforce_attendance",
+      "name": "workforce_attendance_employee_id_index",
+      "unique": false,
+      "columns": [
+        "employee_id"
+      ]
+    },
+    {
+      "table": "workforce_attendance",
+      "name": "workforce_attendance_attendance_date_index",
+      "unique": false,
+      "columns": [
+        "attendance_date"
+      ]
+    },
+    {
+      "table": "incidents",
+      "name": "incidents_tenant_id_branch_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id"
+      ]
+    },
+    {
+      "table": "incidents",
+      "name": "incidents_incident_date_index",
+      "unique": false,
+      "columns": [
+        "incident_date"
+      ]
+    },
+    {
+      "table": "incidents",
+      "name": "incidents_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "incidents",
+      "name": "incidents_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "inspection_documents",
+      "name": "inspection_documents_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "inspection_documents",
+      "name": "inspection_documents_inspection_type_index",
+      "unique": false,
+      "columns": [
+        "inspection_type"
+      ]
+    },
+    {
+      "table": "inspection_documents",
+      "name": "inspection_documents_inspection_date_index",
+      "unique": false,
+      "columns": [
+        "inspection_date"
+      ]
+    },
+    {
+      "table": "compliance_execution_logs",
+      "name": "compliance_execution_logs_tenant_id_batch_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "batch_id"
+      ]
+    },
+    {
+      "table": "compliance_execution_logs",
+      "name": "compliance_execution_logs_batch_id_form_code_index",
+      "unique": false,
+      "columns": [
+        "batch_id",
+        "form_code"
+      ]
+    },
+    {
+      "table": "compliance_execution_logs",
+      "name": "compliance_execution_logs_status_index",
+      "unique": false,
+      "columns": [
+        "status"
+      ]
+    },
+    {
+      "table": "compliance_execution_logs",
+      "name": "compliance_execution_logs_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "compliance_execution_logs",
+      "name": "compliance_execution_logs_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "compliance_execution_logs",
+      "name": "compliance_execution_logs_batch_id_index",
+      "unique": false,
+      "columns": [
+        "batch_id"
+      ]
+    },
+    {
+      "table": "compliance_forms",
+      "name": "compliance_forms_tenant_id_form_code_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "form_code"
+      ]
+    },
+    {
+      "table": "compliance_forms",
+      "name": "compliance_forms_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "compliance_forms",
+      "name": "compliance_forms_form_code_index",
+      "unique": false,
+      "columns": [
+        "form_code"
+      ]
+    },
+    {
+      "table": "compliance_forms",
+      "name": "compliance_forms_generated_at_index",
+      "unique": false,
+      "columns": [
+        "generated_at"
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "name": "contractor_compliance_contractor_id_branch_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id",
+        "branch_id"
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "name": "contractor_compliance_contractor_id_index",
+      "unique": false,
+      "columns": [
+        "contractor_id"
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "name": "contractor_compliance_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "compliance_forms_master",
+      "name": "compliance_forms_master_form_code_unique",
+      "unique": true,
+      "columns": [
+        "form_code"
+      ]
+    },
+    {
+      "table": "compliance_status",
+      "name": "unique_compliance_period",
+      "unique": true,
+      "columns": [
+        "tenant_id",
+        "branch_id",
+        "form_id",
+        "period_from",
+        "period_to"
+      ]
+    },
+    {
+      "table": "compliance_status",
+      "name": "compliance_status_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "compliance_status",
+      "name": "compliance_status_branch_id_index",
+      "unique": false,
+      "columns": [
+        "branch_id"
+      ]
+    },
+    {
+      "table": "compliance_status",
+      "name": "compliance_status_form_id_index",
+      "unique": false,
+      "columns": [
+        "form_id"
+      ]
+    },
+    {
+      "table": "compliance_generation_logs",
+      "name": "compliance_generation_logs_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "compliance_generation_logs",
+      "name": "compliance_generation_logs_form_id_index",
+      "unique": false,
+      "columns": [
+        "form_id"
+      ]
+    },
+    {
+      "table": "compliance_generation_logs",
+      "name": "compliance_generation_logs_compliance_status_id_index",
+      "unique": false,
+      "columns": [
+        "compliance_status_id"
+      ]
+    },
+    {
+      "table": "compliance_reminders",
+      "name": "compliance_reminders_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "compliance_reminders",
+      "name": "compliance_reminders_form_id_index",
+      "unique": false,
+      "columns": [
+        "form_id"
+      ]
+    },
+    {
+      "table": "compliance_reminders",
+      "name": "compliance_reminders_due_date_index",
+      "unique": false,
+      "columns": [
+        "due_date"
+      ]
+    },
+    {
+      "table": "compliance_attachments",
+      "name": "compliance_attachments_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "compliance_attachments",
+      "name": "compliance_attachments_form_id_index",
+      "unique": false,
+      "columns": [
+        "form_id"
+      ]
+    },
+    {
+      "table": "compliance_attachments",
+      "name": "compliance_attachments_compliance_status_id_index",
+      "unique": false,
+      "columns": [
+        "compliance_status_id"
+      ]
+    },
+    {
+      "table": "compliance_status",
+      "name": "compliance_status_revised_from_id_index",
+      "unique": false,
+      "columns": [
+        "revised_from_id"
+      ]
+    },
+    {
+      "table": "compliance_form_sources",
+      "name": "compliance_form_sources_form_id_index",
+      "unique": false,
+      "columns": [
+        "form_id"
+      ]
+    },
+    {
+      "table": "compliance_sections",
+      "name": "compliance_sections_section_code_unique",
+      "unique": true,
+      "columns": [
+        "section_code"
+      ]
+    },
+    {
+      "table": "compliance_signatures",
+      "name": "compliance_signatures_batch_id_form_code_unique",
+      "unique": true,
+      "columns": [
+        "batch_id",
+        "form_code"
+      ]
+    },
+    {
+      "table": "compliance_signatures",
+      "name": "compliance_signatures_tenant_id_batch_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "batch_id"
+      ]
+    },
+    {
+      "table": "compliance_signatures",
+      "name": "compliance_signatures_document_hash_index",
+      "unique": false,
+      "columns": [
+        "document_hash"
+      ]
+    },
+    {
+      "table": "compliance_audit_logs",
+      "name": "compliance_audit_logs_tenant_id_created_at_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "created_at"
+      ]
+    },
+    {
+      "table": "compliance_audit_logs",
+      "name": "compliance_audit_logs_batch_id_action_index",
+      "unique": false,
+      "columns": [
+        "batch_id",
+        "action"
+      ]
+    },
+    {
+      "table": "compliance_timelines",
+      "name": "timeline_unique",
+      "unique": true,
+      "columns": [
+        "tenant_id",
+        "form_master_id",
+        "period_month",
+        "period_year"
+      ]
+    },
+    {
+      "table": "compliance_timelines",
+      "name": "compliance_timelines_tenant_id_status_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "status"
+      ]
+    },
+    {
+      "table": "compliance_timelines",
+      "name": "compliance_timelines_due_date_status_index",
+      "unique": false,
+      "columns": [
+        "due_date",
+        "status"
+      ]
+    },
+    {
+      "table": "compliance_manual_uploads",
+      "name": "compliance_manual_uploads_batch_id_form_code_index",
+      "unique": false,
+      "columns": [
+        "batch_id",
+        "form_code"
+      ]
+    },
+    {
+      "table": "compliance_manual_uploads",
+      "name": "compliance_manual_uploads_user_id_form_code_index",
+      "unique": false,
+      "columns": [
+        "user_id",
+        "form_code"
+      ]
+    },
+    {
+      "table": "compliance_generation_logs",
+      "name": "compliance_generation_logs_batch_id_index",
+      "unique": false,
+      "columns": [
+        "batch_id"
+      ]
+    },
+    {
+      "table": "statutory_manual_data",
+      "name": "statutory_manual_data_tenant_id_month_year_unique",
+      "unique": true,
+      "columns": [
+        "tenant_id",
+        "month",
+        "year"
+      ]
+    },
+    {
+      "table": "compliance_batch_forms",
+      "name": "compliance_batch_forms_batch_id_status_index",
+      "unique": false,
+      "columns": [
+        "batch_id",
+        "status"
+      ]
+    },
+    {
+      "table": "compliance_batch_forms",
+      "name": "compliance_batch_forms_tenant_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id"
+      ]
+    },
+    {
+      "table": "compliance_form_audit_scores",
+      "name": "compliance_form_audit_scores_tenant_id_batch_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "batch_id"
+      ]
+    },
+    {
+      "table": "compliance_form_audit_scores",
+      "name": "compliance_form_audit_scores_form_code_index",
+      "unique": false,
+      "columns": [
+        "form_code"
+      ]
+    },
+    {
+      "table": "telescope_entries",
+      "name": "telescope_entries_uuid_unique",
+      "unique": true,
+      "columns": [
+        "uuid"
+      ]
+    },
+    {
+      "table": "telescope_entries",
+      "name": "telescope_entries_batch_id_index",
+      "unique": false,
+      "columns": [
+        "batch_id"
+      ]
+    },
+    {
+      "table": "telescope_entries",
+      "name": "telescope_entries_family_hash_index",
+      "unique": false,
+      "columns": [
+        "family_hash"
+      ]
+    },
+    {
+      "table": "telescope_entries",
+      "name": "telescope_entries_created_at_index",
+      "unique": false,
+      "columns": [
+        "created_at"
+      ]
+    },
+    {
+      "table": "telescope_entries",
+      "name": "telescope_entries_type_should_display_on_index_index",
+      "unique": false,
+      "columns": [
+        "type",
+        "should_display_on_index"
+      ]
+    },
+    {
+      "table": "telescope_entries_tags",
+      "name": "telescope_entries_tags_tag_index",
+      "unique": false,
+      "columns": [
+        "tag"
+      ]
+    },
+    {
+      "table": "workforce_deductions",
+      "name": "workforce_deductions_tenant_id_branch_id_deduction_date_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id",
+        "deduction_date"
+      ]
+    },
+    {
+      "table": "workforce_deductions",
+      "name": "workforce_deductions_employee_id_deduction_date_index",
+      "unique": false,
+      "columns": [
+        "employee_id",
+        "deduction_date"
+      ]
+    },
+    {
+      "table": "workforce_fines",
+      "name": "workforce_fines_tenant_id_branch_id_fine_date_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id",
+        "fine_date"
+      ]
+    },
+    {
+      "table": "workforce_fines",
+      "name": "workforce_fines_employee_id_fine_date_index",
+      "unique": false,
+      "columns": [
+        "employee_id",
+        "fine_date"
+      ]
+    },
+    {
+      "table": "workforce_advances",
+      "name": "workforce_advances_tenant_id_branch_id_advance_date_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id",
+        "advance_date"
+      ]
+    },
+    {
+      "table": "workforce_advances",
+      "name": "workforce_advances_employee_id_advance_date_index",
+      "unique": false,
+      "columns": [
+        "employee_id",
+        "advance_date"
+      ]
+    },
+    {
+      "table": "employee_leave",
+      "name": "employee_leave_tenant_id_branch_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id"
+      ]
+    },
+    {
+      "table": "holidays",
+      "name": "holidays_tenant_id_branch_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id"
+      ]
+    },
+    {
+      "table": "hazard_register",
+      "name": "hazard_register_tenant_id_branch_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id"
+      ]
+    },
+    {
+      "table": "employee_financial_register",
+      "name": "employee_financial_register_tenant_id_branch_id_index",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id"
+      ]
+    },
+    {
+      "table": "compliance_manual_batch_items",
+      "name": "idx_manual_items_tenant_branch_batch",
+      "unique": false,
+      "columns": [
+        "tenant_id",
+        "branch_id",
+        "batch_id"
+      ]
+    }
+  ]
+}

@@ -1,170 +1,145 @@
 <?php
-
 /**
- * deploy.php — Browser-triggered deployment for Hostinger shared hosting.
+ * Web-based deployment webhook for shared hosting environments.
+ * Trigger: GET /deploy.php?token=<DEPLOY_SECRET>
+ * Optional: &seed=1 to run seeders, &fresh=1 to migrate:fresh (DESTRUCTIVE)
  *
- * Access via:
- *   https://yourdomain.com/deploy.php?token=compliance2026          → migrate only
- *   https://yourdomain.com/deploy.php?token=compliance2026&seed=1   → migrate + seed
- *   https://yourdomain.com/deploy.php?token=compliance2026&fresh=1  → drop all tables, migrate fresh + seed
- *
- * No SSH, no shell_exec, no proc_open required.
+ * Set DEPLOY_SECRET in .env — never hardcode it here.
  */
 
-// ─── Security token ───────────────────────────────────────────────────────────
-define('DEPLOY_TOKEN', 'compliance2026');
-
-if (empty($_GET['token']) || $_GET['token'] !== DEPLOY_TOKEN) {
-    http_response_code(403);
-    die('403 Forbidden — invalid or missing token.');
-}
-
-// ─── Increase limits for long-running migrations ──────────────────────────────
-ini_set('max_execution_time', 300);
-ini_set('memory_limit', '256M');
-
-// ─── Output buffering so we stream progress to browser ───────────────────────
-@ob_implicit_flush(true);
-@ob_end_flush();
-header('Content-Type: text/html; charset=utf-8');
-header('X-Accel-Buffering: no'); // disable nginx buffering on Hostinger
-
-echo '<!DOCTYPE html><html><head><meta charset="utf-8">
-<title>Deploy</title>
-<style>
-  body { background:#0d1117; color:#c9d1d9; font-family:monospace; padding:24px; }
-  .ok  { color:#3fb950; }
-  .err { color:#f85149; }
-  .info{ color:#58a6ff; }
-  pre  { margin:0; white-space:pre-wrap; word-break:break-all; }
-</style></head><body><pre>';
-
-function out(string $msg, string $type = 'ok'): void
-{
-    echo "<span class=\"{$type}\">" . htmlspecialchars($msg) . "</span>\n";
-    flush();
-}
-
-// ─── Bootstrap Laravel ────────────────────────────────────────────────────────
 $projectRoot = dirname(__DIR__);
 
-out("▶ Bootstrapping Laravel from: {$projectRoot}", 'info');
-
-require $projectRoot . '/vendor/autoload.php';
-
-/** @var \Illuminate\Foundation\Application $app */
-$app = require $projectRoot . '/bootstrap/app.php';
-
-// Boot the full application kernel so all service providers are registered
-$kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
-$request = \Illuminate\Http\Request::capture();
-$kernel->handle($request); // boots providers, registers DB, etc.
-
-out('✔ Laravel booted successfully.', 'ok');
-
-// ─── Verify DB connection ─────────────────────────────────────────────────────
-out('▶ Testing database connection...', 'info');
-try {
-    \Illuminate\Support\Facades\DB::connection()->getPdo();
-    $dbName = \Illuminate\Support\Facades\DB::connection()->getDatabaseName();
-    out("✔ Connected to database: {$dbName}", 'ok');
-} catch (\Exception $e) {
-    out('✘ DB connection failed: ' . $e->getMessage(), 'err');
-    echo '</pre></body></html>';
-    exit(1);
-}
-
-// ─── Resolve the migrator ─────────────────────────────────────────────────────
-/** @var \Illuminate\Database\Migrations\Migrator $migrator */
-$migrator = $app->make('migrator');
-$migrationPath = $projectRoot . '/database/migrations';
-
-// ─── Fresh (drop + re-migrate) ────────────────────────────────────────────────
-if (!empty($_GET['fresh']) && $_GET['fresh'] === '1') {
-    out('▶ Running migrate:fresh — dropping all tables...', 'info');
-    try {
-        // Drop all tables via schema builder
-        $schema = \Illuminate\Support\Facades\Schema::getConnection();
-        $schema->getSchemaBuilder()->dropAllTables();
-        out('✔ All tables dropped.', 'ok');
-    } catch (\Exception $e) {
-        out('✘ Drop tables failed: ' . $e->getMessage(), 'err');
+// Load .env manually (no framework bootstrap)
+$envFile = $projectRoot . '/.env';
+$envVars = [];
+if (file_exists($envFile)) {
+    foreach (file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        if (str_starts_with(trim($line), '#') || !str_contains($line, '=')) continue;
+        [$k, $v] = explode('=', $line, 2);
+        $envVars[trim($k)] = trim($v, " \t\n\r\0\x0B\"'");
     }
 }
 
-// ─── Run migrations ───────────────────────────────────────────────────────────
-out('▶ Running migrations...', 'info');
+$secret = $envVars['DEPLOY_SECRET'] ?? 'compliance2026-change-me';
 
-// Ensure the migrations table exists
-$migrator->getRepository()->createRepository();
+// Auth check
+if (!isset($_GET['token']) || !hash_equals($secret, $_GET['token'])) {
+    http_response_code(403);
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'error', 'message' => 'Unauthorized']);
+    exit;
+}
 
-try {
-    $migrated = $migrator->run([$migrationPath], ['pretend' => false, 'step' => false]);
+$runSeed  = isset($_GET['seed'])  && $_GET['seed']  === '1';
+$runFresh = isset($_GET['fresh']) && $_GET['fresh'] === '1';
+$steps    = [];
+$errors   = [];
 
-    if (empty($migrated)) {
-        out('✔ Nothing to migrate — all migrations already ran.', 'ok');
-    } else {
-        foreach ($migrated as $file) {
-            out('  ✔ Migrated: ' . basename($file), 'ok');
+function run(string $cmd, string $cwd, array &$steps, array &$errors): bool
+{
+    $descriptors = [1 => ['pipe', 'w'], 2 => ['pipe', 'w']];
+    $process = proc_open($cmd, $descriptors, $pipes, $cwd);
+    if (!is_resource($process)) {
+        $errors[] = "Failed to start: $cmd";
+        return false;
+    }
+    $stdout = trim(stream_get_contents($pipes[1]));
+    $stderr = trim(stream_get_contents($pipes[2]));
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+    $code = proc_close($process);
+
+    $steps[] = [
+        'cmd'    => $cmd,
+        'stdout' => $stdout,
+        'stderr' => $stderr ?: null,
+        'code'   => $code,
+        'ok'     => $code === 0,
+    ];
+
+    if ($code !== 0) {
+        $errors[] = "Exit $code: $cmd";
+        return false;
+    }
+    return true;
+}
+
+$php = PHP_BINARY;
+
+// 1. Clear bootstrap cache files
+foreach (['config.php','routes-v7.php','services.php','packages.php'] as $f) {
+    @unlink($projectRoot . '/bootstrap/cache/' . $f);
+}
+$steps[] = ['cmd' => 'rm bootstrap/cache/*.php', 'ok' => true];
+
+// 2. Ensure Telescope disabled
+$envContent = file_get_contents($envFile);
+if (preg_match('/^TELESCOPE_ENABLED=/m', $envContent)) {
+    $envContent = preg_replace('/^TELESCOPE_ENABLED=.*/m', 'TELESCOPE_ENABLED=false', $envContent);
+} else {
+    $envContent .= "\nTELESCOPE_ENABLED=false\n";
+}
+file_put_contents($envFile, $envContent);
+$steps[] = ['cmd' => 'set TELESCOPE_ENABLED=false', 'ok' => true];
+
+// 3. Clear artisan caches
+run("$php artisan config:clear",  $projectRoot, $steps, $errors);
+run("$php artisan cache:clear",   $projectRoot, $steps, $errors);
+run("$php artisan route:clear",   $projectRoot, $steps, $errors);
+run("$php artisan view:clear",    $projectRoot, $steps, $errors);
+
+// 4. Composer install
+run("$php composer.phar install --no-dev --optimize-autoloader --no-interaction 2>&1 || composer install --no-dev --optimize-autoloader --no-interaction",
+    $projectRoot, $steps, $errors);
+
+// 5. Migrations
+$migrateCmd = $runFresh
+    ? "$php artisan migrate:fresh --force"
+    : "$php artisan migrate --force";
+run($migrateCmd, $projectRoot, $steps, $errors);
+
+// 6. Seeders
+if ($runSeed || empty($errors)) {
+    // Check if seeding is needed
+    try {
+        $pdo = new PDO(
+            "mysql:host={$envVars['DB_HOST']};port={$envVars['DB_PORT']};dbname={$envVars['DB_DATABASE']};charset=utf8mb4",
+            $envVars['DB_USERNAME'], $envVars['DB_PASSWORD']
+        );
+        $count = $pdo->query('SELECT COUNT(*) FROM compliance_forms_master')->fetchColumn();
+        if ($runSeed || $count == 0) {
+            run("$php artisan db:seed --force", $projectRoot, $steps, $errors);
+        } else {
+            $steps[] = ['cmd' => 'db:seed', 'stdout' => "Skipped — $count forms already seeded", 'ok' => true];
         }
-        out('✔ Migrations complete.', 'ok');
-    }
-} catch (\Exception $e) {
-    out('✘ Migration failed: ' . $e->getMessage(), 'err');
-    out($e->getTraceAsString(), 'err');
-    echo '</pre></body></html>';
-    exit(1);
-}
-
-// ─── Run seeders ──────────────────────────────────────────────────────────────
-if (!empty($_GET['seed']) && $_GET['seed'] === '1') {
-    out('▶ Running database seeders...', 'info');
-    try {
-        $seeder = $app->make(\Database\Seeders\DatabaseSeeder::class);
-        $seeder->setContainer($app)->setCommand(null)->__invoke();
-        out('✔ Seeding complete.', 'ok');
-    } catch (\Exception $e) {
-        out('✘ Seeding failed: ' . $e->getMessage(), 'err');
-        out($e->getTraceAsString(), 'err');
+    } catch (PDOException $e) {
+        $errors[] = 'Seed check failed: ' . $e->getMessage();
     }
 }
 
-// ─── Clear & rebuild caches ───────────────────────────────────────────────────
-out('▶ Clearing caches...', 'info');
-try {
-    \Illuminate\Support\Facades\Artisan::call('config:clear');
-    out('  ✔ Config cache cleared.', 'ok');
-    \Illuminate\Support\Facades\Artisan::call('route:clear');
-    out('  ✔ Route cache cleared.', 'ok');
-    \Illuminate\Support\Facades\Artisan::call('view:clear');
-    out('  ✔ View cache cleared.', 'ok');
-} catch (\Exception $e) {
-    out('  ⚠ Cache clear warning: ' . $e->getMessage(), 'err');
-}
-
-// ─── Fix storage permissions ──────────────────────────────────────────────────
-out('▶ Setting storage permissions...', 'info');
-foreach (['/storage', '/bootstrap/cache'] as $dir) {
-    if (is_dir($projectRoot . $dir)) {
-        @chmod($projectRoot . $dir, 0755);
-        out("  ✔ chmod 755 {$dir}", 'ok');
-    }
-}
-
-// ─── Create storage symlink if missing ───────────────────────────────────────
+// 7. Storage symlink
 if (!file_exists($projectRoot . '/public/storage')) {
-    try {
-        \Illuminate\Support\Facades\Artisan::call('storage:link');
-        out('✔ Storage symlink created.', 'ok');
-    } catch (\Exception $e) {
-        out('⚠ Storage link warning: ' . $e->getMessage(), 'err');
-    }
+    run("$php artisan storage:link", $projectRoot, $steps, $errors);
+} else {
+    $steps[] = ['cmd' => 'storage:link', 'stdout' => 'Already exists', 'ok' => true];
 }
 
-// ─── Done ─────────────────────────────────────────────────────────────────────
-out('', 'ok');
-out('════════════════════════════════════════', 'info');
-out('✅  Deployment completed successfully!', 'ok');
-out('════════════════════════════════════════', 'info');
+// 8. Optimize
+run("$php artisan config:cache", $projectRoot, $steps, $errors);
+run("$php artisan route:cache",  $projectRoot, $steps, $errors);
+run("$php artisan view:cache",   $projectRoot, $steps, $errors);
 
-echo '</pre></body></html>';
+// 9. Permissions
+@chmod($projectRoot . '/storage', 0755);
+@chmod($projectRoot . '/bootstrap/cache', 0755);
+$steps[] = ['cmd' => 'chmod storage bootstrap/cache', 'ok' => true];
+
+// Response
+$status = empty($errors) ? 'success' : 'partial';
+header('Content-Type: application/json');
+echo json_encode([
+    'status'  => $status,
+    'errors'  => $errors,
+    'steps'   => $steps,
+    'time'    => date('Y-m-d H:i:s'),
+], JSON_PRETTY_PRINT);

@@ -1,0 +1,6757 @@
+{
+  "migrations": [
+    {
+      "table": "users",
+      "file": "0001_01_01_000000_create_users_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "attrs": [
+            "unique"
+          ]
+        },
+        {
+          "name": "email_verified_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2024_01_06_000003_add_tenant_id_to_users.php",
+          "cols": [
+            {
+              "name": "tenant_id",
+              "type": "unsignedBigInteger",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_06_000003_add_tenant_id_to_users.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_130000_add_subscription_to_users.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_130000_add_subscription_to_users.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_25_000000_remove_subscription_from_users.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_25_000000_remove_subscription_from_users.php",
+          "cols": [
+            {
+              "name": "subscription_type",
+              "type": "enum",
+              "attrs": [
+                "default='MINIMAL'"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_04_01_000001_add_branch_id_to_users.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_04_01_000001_add_branch_id_to_users.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "password_reset_tokens",
+      "file": "0001_01_01_000000_create_users_table.php",
+      "columns": [
+        {
+          "name": "email",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "token",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "sessions",
+      "file": "0001_01_01_000000_create_users_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "user_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable",
+            "unsigned"
+          ]
+        },
+        {
+          "name": "ip_address",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "user_agent",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "payload",
+          "type": "longText",
+          "attrs": []
+        },
+        {
+          "name": "last_activity",
+          "type": "integer",
+          "attrs": []
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "cache",
+      "file": "0001_01_01_000001_create_cache_table.php",
+      "columns": [
+        {
+          "name": "key",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "expiration",
+          "type": "integer",
+          "attrs": []
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "cache_locks",
+      "file": "0001_01_01_000001_create_cache_table.php",
+      "columns": [
+        {
+          "name": "key",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "owner",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "expiration",
+          "type": "integer",
+          "attrs": []
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "jobs",
+      "file": "0001_01_01_000002_create_jobs_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "queue",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "payload",
+          "type": "longText",
+          "attrs": []
+        },
+        {
+          "name": "attempts",
+          "type": "unsignedTinyInteger",
+          "attrs": []
+        },
+        {
+          "name": "reserved_at",
+          "type": "unsignedInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "available_at",
+          "type": "unsignedInteger",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "unsignedInteger",
+          "attrs": []
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "job_batches",
+      "file": "0001_01_01_000002_create_jobs_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "total_jobs",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "pending_jobs",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "failed_jobs",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "failed_job_ids",
+          "type": "longText",
+          "attrs": []
+        },
+        {
+          "name": "cancelled_at",
+          "type": "integer",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "finished_at",
+          "type": "integer",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "failed_jobs",
+      "file": "0001_01_01_000002_create_jobs_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "uuid",
+          "type": "string",
+          "attrs": [
+            "unique"
+          ]
+        },
+        {
+          "name": "connection",
+          "type": "text",
+          "attrs": []
+        },
+        {
+          "name": "queue",
+          "type": "text",
+          "attrs": []
+        },
+        {
+          "name": "payload",
+          "type": "longText",
+          "attrs": []
+        },
+        {
+          "name": "exception",
+          "type": "longText",
+          "attrs": []
+        },
+        {
+          "name": "failed_at",
+          "type": "timestamp",
+          "attrs": []
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "tenants",
+      "file": "2024_01_01_000000_create_tenants_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2024_01_06_000001_add_subscription_type_to_tenants.php",
+          "cols": [
+            {
+              "name": "subscription_type",
+              "type": "enum",
+              "attrs": [
+                "default='FULL'"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_06_000001_add_subscription_type_to_tenants.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_141243_add_statutory_fields_to_tenants_table.php",
+          "cols": [
+            {
+              "name": "establishment_name",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "factory_license_no",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "pf_code",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "esi_code",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "labour_office_address",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_141243_add_statutory_fields_to_tenants_table.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "branches",
+      "file": "2024_01_01_000001_create_branches_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "unit_name",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "factory_license_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "pf_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "esi_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_name"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2026_02_24_081112_add_pf_esi_codes_to_branches_table.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_081112_add_pf_esi_codes_to_branches_table.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_141310_add_unit_fields_to_branches_table.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_141310_add_unit_fields_to_branches_table.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_144216_add_address_to_branches_table.php",
+          "cols": [
+            {
+              "name": "address",
+              "type": "text",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_144216_add_address_to_branches_table.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "workforce_employee",
+      "file": "2024_01_01_000001_create_workforce_employee_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "employee_code",
+          "type": "string",
+          "attrs": [
+            "unique"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "pf_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "esi_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "date_of_joining",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "designation",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "department",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "basic_salary",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "default='active'"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "set null"
+        }
+      ],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2026_03_20_000001_add_missing_columns_to_workforce_employee.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000001_add_missing_columns_to_workforce_employee.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000006_add_shift_id_to_workforce_employee.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000006_add_shift_id_to_workforce_employee.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_04_10_000001_add_full_employee_fields_to_workforce_employee.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "payroll_cycles",
+      "file": "2024_01_01_000003_create_payroll_cycles_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "cycle_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "processed_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "default='pending'"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "payroll_settings",
+      "file": "2024_01_01_000003_create_payroll_settings_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "unique"
+          ]
+        },
+        {
+          "name": "pf_rate",
+          "type": "decimal",
+          "attrs": [
+            "default=12.00"
+          ]
+        },
+        {
+          "name": "esi_rate",
+          "type": "decimal",
+          "attrs": [
+            "default=0.75"
+          ]
+        },
+        {
+          "name": "ot_multiplier",
+          "type": "decimal",
+          "attrs": [
+            "default=2.00"
+          ]
+        },
+        {
+          "name": "bonus_min_percent",
+          "type": "decimal",
+          "attrs": [
+            "default=8.33"
+          ]
+        },
+        {
+          "name": "bonus_max_percent",
+          "type": "decimal",
+          "attrs": [
+            "default=20.00"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "payroll_entries",
+      "file": "2024_01_01_000004_create_payroll_entries_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "payroll_cycle_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "total_days_worked",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "paid_leave_days",
+          "type": "integer",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "unpaid_leave_days",
+          "type": "integer",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "overtime_hours",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "basic_earned",
+          "type": "decimal",
+          "attrs": []
+        },
+        {
+          "name": "da_earned",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "hra_earned",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "other_allowances",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "overtime_wages",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "gross_salary",
+          "type": "decimal",
+          "attrs": []
+        },
+        {
+          "name": "pf_employee",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "esi_employee",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "professional_tax",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "fines",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "advances",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "other_deductions",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "total_deductions",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "net_salary",
+          "type": "decimal",
+          "attrs": []
+        },
+        {
+          "name": "payment_date",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "payment_mode",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "transaction_reference",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "set null"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "payroll_cycle_id",
+          "references": "id",
+          "on": "payroll_cycles",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id",
+            "payroll_cycle_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "employee_id",
+            "payroll_cycle_id"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "bonus_records",
+      "file": "2024_01_01_000005_create_bonus_records_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "financial_year",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "bonus_percentage",
+          "type": "decimal",
+          "attrs": []
+        },
+        {
+          "name": "bonus_amount",
+          "type": "decimal",
+          "attrs": []
+        },
+        {
+          "name": "payment_date",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "set null"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id",
+            "financial_year"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2026_03_10_000003_add_branch_id_to_bonus_records.php",
+          "cols": [],
+          "foreigns": [
+            {
+              "column": "branch_id",
+              "references": "id",
+              "on": "branches",
+              "onDelete": "set null"
+            }
+          ],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_000003_add_branch_id_to_bonus_records.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "contractor_compliance",
+      "file": "2024_01_01_000006_create_contractor_compliance_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "contractor_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "clra_license_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "license_valid_from",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "license_valid_to",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "pf_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "esi_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "labour_registration_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "last_return_filed",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "is_compliant",
+          "type": "boolean",
+          "attrs": [
+            "default=true"
+          ]
+        },
+        {
+          "name": "compliance_notes",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "contractor_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "clra_license_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "license_valid_from",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "license_valid_to",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "pf_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "esi_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "labour_registration_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "last_return_filed",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "is_compliant",
+          "type": "boolean",
+          "attrs": [
+            "default=true"
+          ]
+        },
+        {
+          "name": "compliance_notes",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "contractor_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "clra_license_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "license_valid_from",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "license_valid_to",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "pf_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "esi_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "labour_registration_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "last_return_filed",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "is_compliant",
+          "type": "boolean",
+          "attrs": [
+            "default=true"
+          ]
+        },
+        {
+          "name": "compliance_notes",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "contractor_id",
+          "references": "id",
+          "on": "contractor_master",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "contractor_id",
+          "references": "id",
+          "on": "contractor_master",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "contractor_id",
+          "references": "id",
+          "on": "contractor_master",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "contractor_id",
+            "branch_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "contractor_id",
+            "branch_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "contractor_id",
+            "branch_id"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2024_01_02_000005_add_composite_indexes.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": [
+            {
+              "columns": [
+                "contractor_id",
+                "branch_id",
+                "idx_contractor_branch"
+              ],
+              "type": "index"
+            }
+          ]
+        },
+        {
+          "file": "2024_01_02_000005_add_composite_indexes.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "contractor_master",
+      "file": "2024_01_01_000006_create_contractor_master_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "company_type",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "company_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "license_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "valid_from",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "valid_to",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "company_address",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contact_person",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contact_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "pan_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "gst_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "default='active'"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "company_type",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "company_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "contractor_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contractor_name",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "license_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "valid_from",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "valid_to",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "company_address",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contact_person",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contact_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "pan_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "gst_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "license_no",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "license_expiry",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "default='active'"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "company_name"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "tenant_id",
+            "company_name"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2024_01_02_000002_restructure_clra_module.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000004_fix_contractor_master_schema.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000004_fix_contractor_master_schema.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "contractors",
+      "file": "2024_01_01_000006_create_contractors_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "contractor_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "license_number",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "valid_from",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "valid_to",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "pf_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "esi_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "contractor_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "license_number",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "valid_from",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "valid_to",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "max_worker_limit",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "pf_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "esi_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "license_number"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "contract_labour_deployment",
+      "file": "2024_01_01_000007_create_all_contractor_tables.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contractor_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contractor_compliance_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "wage_rate",
+          "type": "decimal",
+          "attrs": []
+        },
+        {
+          "name": "deployment_start",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "deployment_end",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "work_order_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "work_order_date",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "default='active'"
+          ]
+        },
+        {
+          "name": "overtime_hours",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "overtime_wages",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "deployment_date",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "workmen_count",
+          "type": "integer",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "work_description",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "nature_of_work",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "work_location",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "termination_reason",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contractor_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contractor_compliance_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "wage_rate",
+          "type": "decimal",
+          "attrs": []
+        },
+        {
+          "name": "deployment_start",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "deployment_end",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "work_order_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "work_order_date",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "default='active'"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "contractor_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "contractor_id",
+            "employee_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "tenant_id",
+            "contractor_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "contractor_id",
+            "employee_id"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2024_01_02_000002_restructure_clra_module.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_02_000005_add_composite_indexes.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": [
+            {
+              "columns": [
+                "tenant_id",
+                "project_id",
+                "idx_tenant_project"
+              ],
+              "type": "index"
+            }
+          ]
+        },
+        {
+          "file": "2024_01_02_000005_add_composite_indexes.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_120000_add_overtime_to_contract_labour_deployment.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_24_120000_add_overtime_to_contract_labour_deployment.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_000005_add_contractor_id_to_deployment.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_000005_add_contractor_id_to_deployment.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_113818_add_remarks_to_contract_labour_deployment.php",
+          "cols": [
+            {
+              "name": "remarks",
+              "type": "text",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_113818_add_remarks_to_contract_labour_deployment.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000002_add_missing_compliance_columns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000002_add_missing_compliance_columns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000005_fix_contract_labour_deployment_schema.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000005_fix_contract_labour_deployment_schema.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "clra_returns",
+      "file": "2024_01_01_000007_create_clra_returns_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "return_type",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "total_workers",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "total_wages",
+          "type": "decimal",
+          "attrs": []
+        },
+        {
+          "name": "total_ot",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "total_deductions",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2026_03_20_000007_add_branch_id_to_clra_returns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000007_add_branch_id_to_clra_returns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "contract_labour",
+      "file": "2024_01_01_000007_create_contract_labour_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "contractor_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "deployment_location",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "wage_rate",
+          "type": "decimal",
+          "attrs": []
+        },
+        {
+          "name": "employment_start",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "employment_end",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "contractor_id",
+          "references": "id",
+          "on": "contractors",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "contractor_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "contractor_id",
+            "employee_id"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "incident_documents",
+      "file": "2024_01_01_000008_create_incident_documents_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "incident_type",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "incident_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "authority_name",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "reference_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "document_path",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "uploaded_by",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "uploaded_at",
+          "type": "timestamp",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "uploaded_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2026_03_10_000004_add_branch_id_to_incident_documents.php",
+          "cols": [],
+          "foreigns": [
+            {
+              "column": "branch_id",
+              "references": "id",
+              "on": "branches",
+              "onDelete": "set null"
+            }
+          ],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_000004_add_branch_id_to_incident_documents.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "workforce_attendance",
+      "file": "2024_01_01_000008_create_workforce_attendance_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "attendance_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "attrs": [
+            "default='present'"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "employee_id",
+            "attendance_date",
+            "att_unique"
+          ],
+          "type": "unique"
+        },
+        {
+          "columns": [
+            "tenant_id",
+            "attendance_date"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2024_01_02_000005_add_composite_indexes.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": [
+            {
+              "columns": [
+                "employee_id",
+                "attendance_date",
+                "idx_employee_date"
+              ],
+              "type": "index"
+            }
+          ]
+        },
+        {
+          "file": "2024_01_02_000005_add_composite_indexes.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_06_122159_add_deleted_at_to_workforce_attendance.php",
+          "cols": [
+            {
+              "name": "deleted_at",
+              "type": "timestamp",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_06_122159_add_deleted_at_to_workforce_attendance.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_000002_add_branch_id_to_attendance.php",
+          "cols": [],
+          "foreigns": [
+            {
+              "column": "branch_id",
+              "references": "id",
+              "on": "branches",
+              "onDelete": "set null"
+            }
+          ],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_000002_add_branch_id_to_attendance.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_04_15_000001_add_overtime_hours_to_workforce_attendance.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_04_15_000001_add_overtime_hours_to_workforce_attendance.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "compliance_execution_batches",
+      "file": "2024_01_01_000009_create_compliance_execution_batches_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "section_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "period_month",
+          "type": "integer",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "period_year",
+          "type": "integer",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "form_ids",
+          "type": "json",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "default='pending'"
+          ]
+        },
+        {
+          "name": "created_by",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "processed_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "results",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "generated_report_path",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2024_01_07_000001_add_period_month_year_to_batches.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_07_000001_add_period_month_year_to_batches.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_20_000003_add_locking_to_batches.php",
+          "cols": [
+            {
+              "name": "is_locked",
+              "type": "boolean",
+              "attrs": [
+                "default=false"
+              ]
+            },
+            {
+              "name": "locked_at",
+              "type": "timestamp",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "locked_by_user_id",
+              "type": "unsignedBigInteger",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_20_000003_add_locking_to_batches.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "incidents",
+      "file": "2024_01_01_000009_create_incidents_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "incident_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "severity",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "incident_date"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2026_03_12_135241_alter_incidents_for_esi_forms.php",
+          "cols": [
+            {
+              "name": "employee_id",
+              "type": "unsignedBigInteger",
+              "attrs": [
+                "nullable",
+                "unsigned"
+              ]
+            },
+            {
+              "name": "notice_date",
+              "type": "date",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "notice_time",
+              "type": "time",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "incident_time",
+              "type": "time",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "location",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "cause",
+              "type": "text",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "injury_type",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "activity",
+              "type": "text",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "first_aid_by",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "witness",
+              "type": "text",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "remarks",
+              "type": "text",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "inspection_documents",
+      "file": "2024_01_01_000009_create_inspection_documents_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "inspection_type",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "inspection_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "inspecting_authority",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "reference_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "document_path",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "uploaded_by",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "uploaded_at",
+          "type": "timestamp",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "uploaded_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "compliance_execution_logs",
+      "file": "2024_01_01_000010_create_compliance_execution_logs_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "batch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "form_code",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "attrs": [
+            "default='pending'"
+          ]
+        },
+        {
+          "name": "execution_time",
+          "type": "integer",
+          "attrs": [
+            "nullable",
+            "comment"
+          ]
+        },
+        {
+          "name": "records_generated",
+          "type": "integer",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "error_message",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "execution_mode",
+          "type": "string",
+          "attrs": [
+            "default='batch'",
+            "comment"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "batch_id",
+          "references": "id",
+          "on": "compliance_execution_batches",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "batch_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "batch_id",
+            "form_code"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "status"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "compliance_forms",
+      "file": "2024_01_01_000010_create_compliance_forms_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "form_code",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "frequency_type",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "file_path",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "generated_by",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "generated_at",
+          "type": "timestamp",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "generated_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "form_code"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "workforce_payroll_cycle",
+      "file": "2024_01_02_000003_add_payroll_constraints.php",
+      "columns": [],
+      "foreigns": [],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2024_01_02_000003_add_payroll_constraints.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": [
+            {
+              "columns": [
+                "tenant_id",
+                "cycle_name",
+                "unique_tenant_cycle"
+              ],
+              "type": "unique"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "workforce_payroll_entry",
+      "file": "2024_01_02_000003_add_payroll_constraints.php",
+      "columns": [],
+      "foreigns": [],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2024_01_02_000003_add_payroll_constraints.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": [
+            {
+              "columns": [
+                "payroll_cycle_id",
+                "employee_id",
+                "unique_cycle_employee"
+              ],
+              "type": "unique"
+            }
+          ]
+        },
+        {
+          "file": "2024_01_02_000003_add_payroll_constraints.php",
+          "cols": [
+            {
+              "name": "tenant_id",
+              "type": "unsignedBigInteger",
+              "attrs": []
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_02_000005_add_composite_indexes.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": [
+            {
+              "columns": [
+                "tenant_id",
+                "payroll_cycle_id",
+                "idx_tenant_cycle"
+              ],
+              "type": "index"
+            }
+          ]
+        },
+        {
+          "file": "2024_01_02_000005_add_composite_indexes.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_000001_add_branch_id_to_payroll_entry.php",
+          "cols": [
+            {
+              "name": "branch_id",
+              "type": "unsignedBigInteger",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_000001_add_branch_id_to_payroll_entry.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "compliance_forms_master",
+      "file": "2024_01_03_000001_create_compliance_forms_master_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "form_code",
+          "type": "string",
+          "attrs": [
+            "unique"
+          ]
+        },
+        {
+          "name": "form_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "act_type",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "frequency",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "priority",
+          "type": "enum",
+          "attrs": [
+            "default='Medium'"
+          ]
+        },
+        {
+          "name": "auto_generate",
+          "type": "boolean",
+          "attrs": [
+            "default=false"
+          ]
+        },
+        {
+          "name": "upload_only",
+          "type": "boolean",
+          "attrs": [
+            "default=false"
+          ]
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "attrs": [
+            "default=true"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2024_01_04_000003_add_due_date_fields_to_forms_master.php",
+          "cols": [
+            {
+              "name": "due_day",
+              "type": "integer",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "due_month",
+              "type": "integer",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "grace_days",
+              "type": "integer",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_04_000003_add_due_date_fields_to_forms_master.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_05_000003_add_section_id_to_compliance_forms_master.php",
+          "cols": [
+            {
+              "name": "section_id",
+              "type": "unsignedBigInteger",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_05_000003_add_section_id_to_compliance_forms_master.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "compliance_status",
+      "file": "2024_01_03_000002_create_compliance_status_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "form_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "period_from",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "period_to",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "attrs": [
+            "default='Pending'"
+          ]
+        },
+        {
+          "name": "generated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "uploaded_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "approved_by",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "approved_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "approved_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "set null"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id",
+            "form_id",
+            "period_from",
+            "period_to",
+            "unique_compliance_period"
+          ],
+          "type": "unique"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2024_01_04_000002_add_versioning_to_compliance_status.php",
+          "cols": [
+            {
+              "name": "version_number",
+              "type": "integer",
+              "attrs": [
+                "default=1"
+              ]
+            },
+            {
+              "name": "is_revised",
+              "type": "boolean",
+              "attrs": [
+                "default=false"
+              ]
+            },
+            {
+              "name": "revised_from_id",
+              "type": "unsignedBigInteger",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "revision_reason",
+              "type": "text",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [
+            {
+              "column": "revised_from_id",
+              "references": "id",
+              "on": "compliance_status",
+              "onDelete": "set null"
+            }
+          ],
+          "indices": [
+            {
+              "columns": [
+                "revised_from_id"
+              ],
+              "type": "index"
+            }
+          ]
+        },
+        {
+          "file": "2024_01_04_000002_add_versioning_to_compliance_status.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "compliance_generation_logs",
+      "file": "2024_01_03_000003_create_compliance_generation_logs_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "form_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "compliance_status_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "generated_by",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "file_path",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "checksum_hash",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "ip_address",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "user_agent",
+          "type": "text",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "compliance_status_id",
+          "references": "id",
+          "on": "compliance_status",
+          "onDelete": "set null"
+        },
+        {
+          "column": "generated_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2024_01_04_000001_add_snapshot_to_generation_logs.php",
+          "cols": [
+            {
+              "name": "generated_snapshot",
+              "type": "json",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_04_000001_add_snapshot_to_generation_logs.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_25_072904_add_batch_id_to_compliance_generation_logs_table.php",
+          "cols": [
+            {
+              "name": "batch_id",
+              "type": "unsignedBigInteger",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": [
+            {
+              "columns": [
+                "batch_id"
+              ],
+              "type": "index"
+            }
+          ]
+        },
+        {
+          "file": "2026_02_25_072904_add_batch_id_to_compliance_generation_logs_table.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_25_073139_fix_compliance_generation_logs_schema.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_25_090245_add_error_message_to_compliance_generation_logs.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_02_25_090245_add_error_message_to_compliance_generation_logs.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "compliance_reminders",
+      "file": "2024_01_03_000004_create_compliance_reminders_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "form_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "reminder_type",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "reminder_sent_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "attrs": [
+            "default='Pending'"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "compliance_attachments",
+      "file": "2024_01_03_000005_create_compliance_attachments_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "form_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "compliance_status_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "uploaded_by",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "file_path",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "reference_number",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": []
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "compliance_status_id",
+          "references": "id",
+          "on": "compliance_status",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "uploaded_by",
+          "references": "id",
+          "on": "users",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2024_01_06_000002_add_batch_and_upload_type_to_attachments.php",
+          "cols": [
+            {
+              "name": "batch_id",
+              "type": "unsignedBigInteger",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "upload_type",
+              "type": "enum",
+              "attrs": [
+                "default='automated'"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2024_01_06_000002_add_batch_and_upload_type_to_attachments.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "compliance_form_sources",
+      "file": "2024_01_04_000005_create_compliance_form_sources_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "form_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "source_table",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "source_type",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "form_id",
+          "references": "id",
+          "on": "compliance_forms_master",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "compliance_sections",
+      "file": "2024_01_05_000001_create_compliance_sections_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "section_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "section_code",
+          "type": "string",
+          "attrs": [
+            "unique"
+          ]
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "attrs": [
+            "default=true"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": []
+    },
+    {
+      "table": "compliance_signatures",
+      "file": "2024_01_20_000001_create_compliance_signatures_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "form_code",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "batch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "signed_by_user_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "signatory_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "signatory_designation",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "signature_type",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "signature_path",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "signature_hash",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "document_hash",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "ip_address",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "signed_at",
+          "type": "timestamp",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [
+        {
+          "columns": [
+            "batch_id",
+            "form_code"
+          ],
+          "type": "unique"
+        },
+        {
+          "columns": [
+            "tenant_id",
+            "batch_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "document_hash"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "compliance_audit_logs",
+      "file": "2024_01_20_000002_create_compliance_audit_logs_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "user_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "action",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "form_code",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "batch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "ip_address",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "user_agent",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "metadata",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": []
+        }
+      ],
+      "foreigns": [],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "created_at"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "batch_id",
+            "action"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "compliance_timelines",
+      "file": "2026_02_24_110000_create_compliance_timelines_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "unsigned"
+          ]
+        },
+        {
+          "name": "form_master_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "unsigned"
+          ]
+        },
+        {
+          "name": "period_month",
+          "type": "tinyInteger",
+          "attrs": []
+        },
+        {
+          "name": "period_year",
+          "type": "year",
+          "attrs": []
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "attrs": [
+            "default='Pending'"
+          ]
+        },
+        {
+          "name": "reminder_sent",
+          "type": "boolean",
+          "attrs": [
+            "default=false"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "form_master_id",
+            "period_month",
+            "period_year",
+            "timeline_unique"
+          ],
+          "type": "unique"
+        },
+        {
+          "columns": [
+            "tenant_id",
+            "status"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "due_date",
+            "status"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "compliance_manual_uploads",
+      "file": "2026_02_24_130001_create_compliance_manual_uploads_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "user_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "unsigned"
+          ]
+        },
+        {
+          "name": "batch_id",
+          "type": "unsignedBigInteger",
+          "attrs": [
+            "unsigned"
+          ]
+        },
+        {
+          "name": "form_code",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "file_path",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "uploaded_at",
+          "type": "timestamp",
+          "attrs": []
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [
+        {
+          "columns": [
+            "batch_id",
+            "form_code"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "user_id",
+            "form_code"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "statutory_manual_data",
+      "file": "2026_02_26_000001_create_statutory_manual_data_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "month",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "year",
+          "type": "integer",
+          "attrs": []
+        },
+        {
+          "name": "establishment_details",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "employer_details",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "employee_summary",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "wage_summary",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "attendance_summary",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "accident_details",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "contractor_summary",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "month",
+            "year"
+          ],
+          "type": "unique"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "compliance_batch_forms",
+      "file": "2026_02_26_000002_create_compliance_batch_forms_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "batch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "form_code",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "section",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "file_path",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "default='success'"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": []
+        }
+      ],
+      "foreigns": [],
+      "indices": [
+        {
+          "columns": [
+            "batch_id",
+            "status"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "tenant_id"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2026_03_11_000001_make_file_path_nullable_in_compliance_batch_forms.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_11_000001_make_file_path_nullable_in_compliance_batch_forms.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_12_000001_add_updated_at_to_compliance_batch_forms.php",
+          "cols": [
+            {
+              "name": "updated_at",
+              "type": "timestamp",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_12_000001_add_updated_at_to_compliance_batch_forms.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000012_fix_batch_forms_file_path.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_20_000012_fix_batch_forms_file_path.php",
+          "cols": [
+            {
+              "name": "file_path",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_25_000001_make_file_path_nullable_in_batch_forms.php",
+          "cols": [
+            {
+              "name": "file_path",
+              "type": "string",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_25_000001_make_file_path_nullable_in_batch_forms.php",
+          "cols": [
+            {
+              "name": "file_path",
+              "type": "string",
+              "attrs": []
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "compliance_form_audit_scores",
+      "file": "2026_02_27_051302_create_compliance_form_audit_scores_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "batch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "form_code",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "audit_score",
+          "type": "integer",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "attrs": [
+            "default='pending'"
+          ]
+        },
+        {
+          "name": "violations",
+          "type": "json",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "batch_id"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "form_code"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "workforce_fines",
+      "file": "2026_03_10_052541_add_fine_date_to_workforce_fines_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "fine_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "attrs": [
+            "nullable",
+            "comment"
+          ]
+        },
+        {
+          "name": "amount",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id",
+            "fine_date"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "employee_id",
+            "fine_date"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2026_03_10_052541_add_fine_date_to_workforce_fines_table.php",
+          "cols": [
+            {
+              "name": "fine_date",
+              "type": "date",
+              "attrs": [
+                "nullable"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_052541_add_fine_date_to_workforce_fines_table.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_053208_update_workforce_fines_table_schema.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_053208_update_workforce_fines_table_schema.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_113401_fix_missing_compliance_columns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_113401_fix_missing_compliance_columns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "workforce_advances",
+      "file": "2026_03_10_113401_fix_missing_compliance_columns.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "advance_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "amount",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "num_instalments",
+          "type": "integer",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "first_month",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "last_month",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id",
+            "advance_date"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "employee_id",
+            "advance_date"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2026_03_10_113401_fix_missing_compliance_columns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_113401_fix_missing_compliance_columns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "workforce_deductions",
+      "file": "2026_03_10_113401_fix_missing_compliance_columns.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "deduction_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "particulars",
+          "type": "string",
+          "attrs": [
+            "nullable",
+            "comment"
+          ]
+        },
+        {
+          "name": "showed_cause",
+          "type": "boolean",
+          "attrs": [
+            "default=false",
+            "comment"
+          ]
+        },
+        {
+          "name": "witness_name",
+          "type": "string",
+          "attrs": [
+            "nullable",
+            "comment"
+          ]
+        },
+        {
+          "name": "amount",
+          "type": "decimal",
+          "attrs": [
+            "default=0"
+          ]
+        },
+        {
+          "name": "num_instalments",
+          "type": "integer",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "first_month",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "last_month",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id",
+            "deduction_date"
+          ],
+          "type": "index"
+        },
+        {
+          "columns": [
+            "employee_id",
+            "deduction_date"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": [
+        {
+          "file": "2026_03_10_113401_fix_missing_compliance_columns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_10_113401_fix_missing_compliance_columns.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "employee_leave",
+      "file": "2026_03_20_000008_create_employee_leave_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "leave_from",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "leave_to",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "reason",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "holidays",
+      "file": "2026_03_20_000009_create_holidays_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "holiday_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "holiday_name",
+          "type": "string",
+          "attrs": []
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "hazard_register",
+      "file": "2026_03_20_000010_create_hazard_register_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "hazard_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "hazard_type",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "attrs": []
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "action_date",
+          "type": "date",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "employee_financial_register",
+      "file": "2026_03_20_000011_create_employee_financial_register_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "employee_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "transaction_date",
+          "type": "date",
+          "attrs": []
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "installment_amount",
+          "type": "decimal",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "tenant_id",
+          "references": "id",
+          "on": "tenants",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "branch_id",
+          "references": "id",
+          "on": "branches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "employee_id",
+          "references": "id",
+          "on": "workforce_employee",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "columns": [
+            "tenant_id",
+            "branch_id"
+          ],
+          "type": "index"
+        }
+      ],
+      "modifies": []
+    },
+    {
+      "table": "compliance_manual_master",
+      "file": "2026_03_25_000003_create_compliance_manual_master_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "compliance_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "act_name",
+          "type": "string",
+          "attrs": []
+        },
+        {
+          "name": "frequency",
+          "type": "enum",
+          "attrs": []
+        },
+        {
+          "name": "due_month",
+          "type": "integer",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "requires_document",
+          "type": "boolean",
+          "attrs": [
+            "default=true"
+          ]
+        },
+        {
+          "name": "is_event_based",
+          "type": "boolean",
+          "attrs": [
+            "default=false"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2026_03_25_000006_add_is_automatable_to_compliance_manual_master.php",
+          "cols": [
+            {
+              "name": "is_automatable",
+              "type": "boolean",
+              "attrs": [
+                "default=false"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_25_000006_add_is_automatable_to_compliance_manual_master.php",
+          "cols": [],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    },
+    {
+      "table": "compliance_manual_batch_items",
+      "file": "2026_03_25_000004_create_compliance_manual_batch_items_table.php",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "attrs": [
+            "primary",
+            "unsigned",
+            "autoincrement"
+          ]
+        },
+        {
+          "name": "batch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "tenant_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "branch_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "compliance_id",
+          "type": "unsignedBigInteger",
+          "attrs": []
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "attrs": [
+            "default='pending'"
+          ]
+        },
+        {
+          "name": "document_path",
+          "type": "string",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "attrs": [
+            "nullable"
+          ]
+        }
+      ],
+      "foreigns": [
+        {
+          "column": "batch_id",
+          "references": "id",
+          "on": "compliance_execution_batches",
+          "onDelete": "cascade"
+        },
+        {
+          "column": "compliance_id",
+          "references": "id",
+          "on": "compliance_manual_master",
+          "onDelete": "cascade"
+        }
+      ],
+      "indices": [],
+      "modifies": [
+        {
+          "file": "2026_03_25_000005_harden_compliance_manual_batch_items_table.php",
+          "cols": [
+            {
+              "name": "uploaded_at",
+              "type": "timestamp",
+              "attrs": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "uploaded_by",
+              "type": "unsignedBigInteger",
+              "attrs": [
+                "nullable",
+                "unsigned"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        },
+        {
+          "file": "2026_03_25_000005_harden_compliance_manual_batch_items_table.php",
+          "cols": [
+            {
+              "name": "status",
+              "type": "enum",
+              "attrs": [
+                "default='pending'"
+              ]
+            }
+          ],
+          "foreigns": [],
+          "indices": []
+        }
+      ]
+    }
+  ],
+  "actual": {
+    "tables": [
+      "users",
+      "password_reset_tokens",
+      "sessions",
+      "cache",
+      "cache_locks",
+      "jobs",
+      "job_batches",
+      "failed_jobs",
+      "tenants",
+      "branches",
+      "workforce_employee",
+      "payroll_cycles",
+      "payroll_settings",
+      "payroll_entries",
+      "bonus_records",
+      "contractor_compliance",
+      "contractor_master",
+      "contractors",
+      "contract_labour_deployment",
+      "clra_returns",
+      "contract_labour",
+      "incident_documents",
+      "workforce_attendance",
+      "compliance_execution_batches",
+      "incidents",
+      "inspection_documents",
+      "compliance_execution_logs",
+      "compliance_forms",
+      "compliance_forms_master",
+      "compliance_status",
+      "compliance_generation_logs",
+      "compliance_reminders",
+      "compliance_attachments",
+      "__temp__compliance_status",
+      "compliance_form_sources",
+      "compliance_sections",
+      "compliance_signatures",
+      "compliance_audit_logs",
+      "compliance_timelines",
+      "compliance_manual_uploads",
+      "statutory_manual_data",
+      "compliance_batch_forms",
+      "compliance_form_audit_scores",
+      "__temp__compliance_batch_forms",
+      "telescope_entries",
+      "telescope_entries_tags",
+      "telescope_monitoring",
+      "workforce_deductions",
+      "workforce_fines",
+      "workforce_advances",
+      "employee_leave",
+      "holidays",
+      "hazard_register",
+      "employee_financial_register",
+      "compliance_manual_master",
+      "compliance_manual_batch_items",
+      "__temp__compliance_manual_batch_items"
+    ],
+    "altered": [
+      "create unique index \"users_email_unique\" on \"users\" (\"email\")",
+      "create index \"sessions_user_id_index\" on \"sessions\" (\"user_id\")",
+      "create index \"sessions_last_activity_index\" on \"sessions\" (\"last_activity\")",
+      "create index \"cache_expiration_index\" on \"cache\" (\"expiration\")",
+      "create index \"cache_locks_expiration_index\" on \"cache_locks\" (\"expiration\")",
+      "create index \"jobs_queue_index\" on \"jobs\" (\"queue\")",
+      "create unique index \"failed_jobs_uuid_unique\" on \"failed_jobs\" (\"uuid\")",
+      "create index \"branches_tenant_id_branch_name_index\" on \"branches\" (\"tenant_id\", \"branch_name\")",
+      "create index \"branches_tenant_id_index\" on \"branches\" (\"tenant_id\")",
+      "create index \"workforce_employee_tenant_id_index\" on \"workforce_employee\" (\"tenant_id\")",
+      "create index \"workforce_employee_branch_id_index\" on \"workforce_employee\" (\"branch_id\")",
+      "create unique index \"workforce_employee_employee_code_unique\" on \"workforce_employee\" (\"employee_code\")",
+      "create unique index \"payroll_settings_tenant_id_unique\" on \"payroll_settings\" (\"tenant_id\")",
+      "create index \"payroll_entries_tenant_id_branch_id_payroll_cycle_id_index\" on \"payroll_entries\" (\"tenant_id\", \"branch_id\", \"payroll_cycle_id\")",
+      "create index \"payroll_entries_employee_id_payroll_cycle_id_index\" on \"payroll_entries\" (\"employee_id\", \"payroll_cycle_id\")",
+      "create index \"payroll_entries_tenant_id_index\" on \"payroll_entries\" (\"tenant_id\")",
+      "create index \"payroll_entries_branch_id_index\" on \"payroll_entries\" (\"branch_id\")",
+      "create index \"payroll_entries_employee_id_index\" on \"payroll_entries\" (\"employee_id\")",
+      "create index \"payroll_entries_payroll_cycle_id_index\" on \"payroll_entries\" (\"payroll_cycle_id\")",
+      "create index \"bonus_records_tenant_id_branch_id_financial_year_index\" on \"bonus_records\" (\"tenant_id\", \"branch_id\", \"financial_year\")",
+      "create index \"bonus_records_tenant_id_index\" on \"bonus_records\" (\"tenant_id\")",
+      "create index \"bonus_records_branch_id_index\" on \"bonus_records\" (\"branch_id\")",
+      "create index \"bonus_records_employee_id_index\" on \"bonus_records\" (\"employee_id\")",
+      "create index \"bonus_records_financial_year_index\" on \"bonus_records\" (\"financial_year\")",
+      "create index \"contractor_compliance_contractor_id_branch_id_index\" on \"contractor_compliance\" (\"contractor_id\", \"branch_id\")",
+      "create index \"contractor_compliance_contractor_id_index\" on \"contractor_compliance\" (\"contractor_id\")",
+      "create index \"contractor_compliance_branch_id_index\" on \"contractor_compliance\" (\"branch_id\")",
+      "create index \"contractor_master_tenant_id_company_name_index\" on \"contractor_master\" (\"tenant_id\", \"company_name\")",
+      "create index \"contractor_master_tenant_id_index\" on \"contractor_master\" (\"tenant_id\")",
+      "create index \"contractors_tenant_id_license_number_index\" on \"contractors\" (\"tenant_id\", \"license_number\")",
+      "create index \"contractors_tenant_id_index\" on \"contractors\" (\"tenant_id\")",
+      "create index \"contractors_license_number_index\" on \"contractors\" (\"license_number\")",
+      "create index \"contract_labour_deployment_tenant_id_contractor_id_index\" on \"contract_labour_deployment\" (\"tenant_id\", \"contractor_id\")",
+      "create index \"contract_labour_deployment_contractor_id_employee_id_index\" on \"contract_labour_deployment\" (\"contractor_id\", \"employee_id\")",
+      "create index \"contract_labour_deployment_tenant_id_index\" on \"contract_labour_deployment\" (\"tenant_id\")",
+      "create index \"contract_labour_deployment_branch_id_index\" on \"contract_labour_deployment\" (\"branch_id\")",
+      "create index \"contract_labour_deployment_contractor_id_index\" on \"contract_labour_deployment\" (\"contractor_id\")",
+      "create index \"contract_labour_deployment_contractor_compliance_id_index\" on \"contract_labour_deployment\" (\"contractor_compliance_id\")",
+      "create index \"contract_labour_deployment_employee_id_index\" on \"contract_labour_deployment\" (\"employee_id\")",
+      "create index \"contractor_master_tenant_id_company_name_index\" on \"contractor_master\" (\"tenant_id\", \"company_name\")",
+      "create index \"contractor_master_tenant_id_index\" on \"contractor_master\" (\"tenant_id\")",
+      "create index \"contractor_compliance_contractor_id_branch_id_index\" on \"contractor_compliance\" (\"contractor_id\", \"branch_id\")",
+      "create index \"contractor_compliance_contractor_id_index\" on \"contractor_compliance\" (\"contractor_id\")",
+      "create index \"contractor_compliance_branch_id_index\" on \"contractor_compliance\" (\"branch_id\")",
+      "create index \"clra_returns_tenant_id_index\" on \"clra_returns\" (\"tenant_id\")",
+      "create index \"clra_returns_return_type_index\" on \"clra_returns\" (\"return_type\")",
+      "create index \"contract_labour_deployment_tenant_id_contractor_id_index\" on \"contract_labour_deployment\" (\"tenant_id\", \"contractor_id\")",
+      "create index \"contract_labour_deployment_contractor_id_employee_id_index\" on \"contract_labour_deployment\" (\"contractor_id\", \"employee_id\")",
+      "create index \"contract_labour_deployment_tenant_id_index\" on \"contract_labour_deployment\" (\"tenant_id\")",
+      "create index \"contract_labour_deployment_branch_id_index\" on \"contract_labour_deployment\" (\"branch_id\")",
+      "create index \"contract_labour_deployment_contractor_id_index\" on \"contract_labour_deployment\" (\"contractor_id\")",
+      "create index \"contract_labour_deployment_contractor_compliance_id_index\" on \"contract_labour_deployment\" (\"contractor_compliance_id\")",
+      "create index \"contract_labour_deployment_employee_id_index\" on \"contract_labour_deployment\" (\"employee_id\")",
+      "create index \"contract_labour_tenant_id_contractor_id_index\" on \"contract_labour\" (\"tenant_id\", \"contractor_id\")",
+      "create index \"contract_labour_contractor_id_employee_id_index\" on \"contract_labour\" (\"contractor_id\", \"employee_id\")",
+      "create index \"contract_labour_tenant_id_index\" on \"contract_labour\" (\"tenant_id\")",
+      "create index \"contract_labour_contractor_id_index\" on \"contract_labour\" (\"contractor_id\")",
+      "create index \"contract_labour_employee_id_index\" on \"contract_labour\" (\"employee_id\")",
+      "create index \"incident_documents_tenant_id_index\" on \"incident_documents\" (\"tenant_id\")",
+      "create index \"incident_documents_incident_type_index\" on \"incident_documents\" (\"incident_type\")",
+      "create index \"incident_documents_incident_date_index\" on \"incident_documents\" (\"incident_date\")",
+      "create unique index \"att_unique\" on \"workforce_attendance\" (\"tenant_id\", \"employee_id\", \"attendance_date\")",
+      "create index \"workforce_attendance_tenant_id_attendance_date_index\" on \"workforce_attendance\" (\"tenant_id\", \"attendance_date\")",
+      "create index \"workforce_attendance_tenant_id_index\" on \"workforce_attendance\" (\"tenant_id\")",
+      "create index \"workforce_attendance_employee_id_index\" on \"workforce_attendance\" (\"employee_id\")",
+      "create index \"workforce_attendance_attendance_date_index\" on \"workforce_attendance\" (\"attendance_date\")",
+      "create index \"incidents_tenant_id_branch_id_index\" on \"incidents\" (\"tenant_id\", \"branch_id\")",
+      "create index \"incidents_incident_date_index\" on \"incidents\" (\"incident_date\")",
+      "create index \"incidents_tenant_id_index\" on \"incidents\" (\"tenant_id\")",
+      "create index \"incidents_branch_id_index\" on \"incidents\" (\"branch_id\")",
+      "create index \"inspection_documents_tenant_id_index\" on \"inspection_documents\" (\"tenant_id\")",
+      "create index \"inspection_documents_inspection_type_index\" on \"inspection_documents\" (\"inspection_type\")",
+      "create index \"inspection_documents_inspection_date_index\" on \"inspection_documents\" (\"inspection_date\")",
+      "create index \"compliance_execution_logs_tenant_id_batch_id_index\" on \"compliance_execution_logs\" (\"tenant_id\", \"batch_id\")",
+      "create index \"compliance_execution_logs_batch_id_form_code_index\" on \"compliance_execution_logs\" (\"batch_id\", \"form_code\")",
+      "create index \"compliance_execution_logs_status_index\" on \"compliance_execution_logs\" (\"status\")",
+      "create index \"compliance_execution_logs_tenant_id_index\" on \"compliance_execution_logs\" (\"tenant_id\")",
+      "create index \"compliance_execution_logs_branch_id_index\" on \"compliance_execution_logs\" (\"branch_id\")",
+      "create index \"compliance_execution_logs_batch_id_index\" on \"compliance_execution_logs\" (\"batch_id\")",
+      "create index \"compliance_forms_tenant_id_form_code_index\" on \"compliance_forms\" (\"tenant_id\", \"form_code\")",
+      "create index \"compliance_forms_tenant_id_index\" on \"compliance_forms\" (\"tenant_id\")",
+      "create index \"compliance_forms_form_code_index\" on \"compliance_forms\" (\"form_code\")",
+      "create index \"compliance_forms_generated_at_index\" on \"compliance_forms\" (\"generated_at\")",
+      "create index \"contractor_compliance_contractor_id_branch_id_index\" on \"contractor_compliance\" (\"contractor_id\", \"branch_id\")",
+      "create index \"contractor_compliance_contractor_id_index\" on \"contractor_compliance\" (\"contractor_id\")",
+      "create index \"contractor_compliance_branch_id_index\" on \"contractor_compliance\" (\"branch_id\")",
+      "create unique index \"compliance_forms_master_form_code_unique\" on \"compliance_forms_master\" (\"form_code\")",
+      "create unique index \"unique_compliance_period\" on \"compliance_status\" (\"tenant_id\", \"branch_id\", \"form_id\", \"period_from\", \"period_to\")",
+      "create index \"compliance_status_tenant_id_index\" on \"compliance_status\" (\"tenant_id\")",
+      "create index \"compliance_status_branch_id_index\" on \"compliance_status\" (\"branch_id\")",
+      "create index \"compliance_status_form_id_index\" on \"compliance_status\" (\"form_id\")",
+      "create index \"compliance_generation_logs_tenant_id_index\" on \"compliance_generation_logs\" (\"tenant_id\")",
+      "create index \"compliance_generation_logs_form_id_index\" on \"compliance_generation_logs\" (\"form_id\")",
+      "create index \"compliance_generation_logs_compliance_status_id_index\" on \"compliance_generation_logs\" (\"compliance_status_id\")",
+      "create index \"compliance_reminders_tenant_id_index\" on \"compliance_reminders\" (\"tenant_id\")",
+      "create index \"compliance_reminders_form_id_index\" on \"compliance_reminders\" (\"form_id\")",
+      "create index \"compliance_reminders_due_date_index\" on \"compliance_reminders\" (\"due_date\")",
+      "create index \"compliance_attachments_tenant_id_index\" on \"compliance_attachments\" (\"tenant_id\")",
+      "create index \"compliance_attachments_form_id_index\" on \"compliance_attachments\" (\"form_id\")",
+      "create index \"compliance_attachments_compliance_status_id_index\" on \"compliance_attachments\" (\"compliance_status_id\")",
+      "alter table \"compliance_generation_logs\" add column \"generated_snapshot\" text",
+      "alter table \"compliance_status\" add column \"version_number\" integer not null default '1'",
+      "alter table \"compliance_status\" add column \"is_revised\" tinyint(1) not null default '0'",
+      "alter table \"compliance_status\" add column \"revised_from_id\" integer",
+      "alter table \"compliance_status\" add column \"revision_reason\" text",
+      "alter table \"__temp__compliance_status\" rename to \"compliance_status\"",
+      "create index \"compliance_status_revised_from_id_index\" on \"compliance_status\" (\"revised_from_id\")",
+      "alter table \"compliance_forms_master\" add column \"due_day\" integer",
+      "alter table \"compliance_forms_master\" add column \"due_month\" integer",
+      "alter table \"compliance_forms_master\" add column \"grace_days\" integer",
+      "create index \"compliance_form_sources_form_id_index\" on \"compliance_form_sources\" (\"form_id\")",
+      "create unique index \"compliance_sections_section_code_unique\" on \"compliance_sections\" (\"section_code\")",
+      "alter table \"compliance_forms_master\" add column \"section_id\" integer",
+      "alter table \"tenants\" add column \"subscription_type\" varchar check (\"subscription_type\" in ('FULL', 'MINIMAL')) not null default 'FULL'",
+      "alter table \"compliance_attachments\" add column \"batch_id\" integer",
+      "alter table \"compliance_attachments\" add column \"upload_type\" varchar check (\"upload_type\" in ('manual', 'automated')) not null default 'automated'",
+      "alter table \"users\" add column \"tenant_id\" integer",
+      "alter table \"compliance_execution_batches\" add column \"period_month\" integer",
+      "alter table \"compliance_execution_batches\" add column \"period_year\" integer",
+      "create unique index \"compliance_signatures_batch_id_form_code_unique\" on \"compliance_signatures\" (\"batch_id\", \"form_code\")",
+      "create index \"compliance_signatures_tenant_id_batch_id_index\" on \"compliance_signatures\" (\"tenant_id\", \"batch_id\")",
+      "create index \"compliance_signatures_document_hash_index\" on \"compliance_signatures\" (\"document_hash\")",
+      "create index \"compliance_audit_logs_tenant_id_created_at_index\" on \"compliance_audit_logs\" (\"tenant_id\", \"created_at\")",
+      "create index \"compliance_audit_logs_batch_id_action_index\" on \"compliance_audit_logs\" (\"batch_id\", \"action\")",
+      "alter table \"compliance_execution_batches\" add column \"is_locked\" tinyint(1) not null default '0'",
+      "alter table \"compliance_execution_batches\" add column \"locked_at\" datetime",
+      "alter table \"compliance_execution_batches\" add column \"locked_by_user_id\" integer",
+      "alter table \"branches\" add column \"pf_code\" varchar",
+      "alter table \"branches\" add column \"esi_code\" varchar",
+      "create unique index \"timeline_unique\" on \"compliance_timelines\" (\"tenant_id\", \"form_master_id\", \"period_month\", \"period_year\")",
+      "create index \"compliance_timelines_tenant_id_status_index\" on \"compliance_timelines\" (\"tenant_id\", \"status\")",
+      "create index \"compliance_timelines_due_date_status_index\" on \"compliance_timelines\" (\"due_date\", \"status\")",
+      "alter table \"contract_labour_deployment\" add column \"overtime_hours\" numeric not null default '0'",
+      "alter table \"contract_labour_deployment\" add column \"overtime_wages\" numeric not null default '0'",
+      "alter table \"users\" add column \"subscription_type\" varchar check (\"subscription_type\" in ('MINIMAL', 'FULL')) not null default 'MINIMAL'",
+      "create index \"compliance_manual_uploads_batch_id_form_code_index\" on \"compliance_manual_uploads\" (\"batch_id\", \"form_code\")",
+      "create index \"compliance_manual_uploads_user_id_form_code_index\" on \"compliance_manual_uploads\" (\"user_id\", \"form_code\")",
+      "alter table \"tenants\" add column \"establishment_name\" varchar",
+      "alter table \"tenants\" add column \"factory_license_no\" varchar",
+      "alter table \"tenants\" add column \"pf_code\" varchar",
+      "alter table \"tenants\" add column \"esi_code\" varchar",
+      "alter table \"tenants\" add column \"labour_office_address\" varchar",
+      "alter table \"branches\" add column \"unit_name\" varchar",
+      "alter table \"branches\" add column \"address\" text",
+      "alter table \"compliance_generation_logs\" add column \"batch_id\" integer",
+      "create index \"compliance_generation_logs_batch_id_index\" on \"compliance_generation_logs\" (\"batch_id\")",
+      "alter table \"compliance_generation_logs\" add column \"batch_id\" integer",
+      "alter table \"compliance_generation_logs\" add column \"form_code\" varchar not null",
+      "alter table \"compliance_generation_logs\" add column \"tenant_id\" integer not null",
+      "alter table \"compliance_generation_logs\" add column \"status\" varchar not null default 'pending'",
+      "alter table \"compliance_generation_logs\" add column \"generated_file_path\" varchar",
+      "alter table \"compliance_generation_logs\" add column \"error_message\" text",
+      "create unique index \"statutory_manual_data_tenant_id_month_year_unique\" on \"statutory_manual_data\" (\"tenant_id\", \"month\", \"year\")",
+      "create index \"compliance_batch_forms_batch_id_status_index\" on \"compliance_batch_forms\" (\"batch_id\", \"status\")",
+      "create index \"compliance_batch_forms_tenant_id_index\" on \"compliance_batch_forms\" (\"tenant_id\")",
+      "create index \"compliance_form_audit_scores_tenant_id_batch_id_index\" on \"compliance_form_audit_scores\" (\"tenant_id\", \"batch_id\")",
+      "create index \"compliance_form_audit_scores_form_code_index\" on \"compliance_form_audit_scores\" (\"form_code\")",
+      "alter table \"workforce_attendance\" add column \"deleted_at\" datetime",
+      "alter table \"__temp__compliance_batch_forms\" rename to \"compliance_batch_forms\"",
+      "create unique index \"telescope_entries_uuid_unique\" on \"telescope_entries\" (\"uuid\")",
+      "create index \"telescope_entries_batch_id_index\" on \"telescope_entries\" (\"batch_id\")",
+      "create index \"telescope_entries_family_hash_index\" on \"telescope_entries\" (\"family_hash\")",
+      "create index \"telescope_entries_created_at_index\" on \"telescope_entries\" (\"created_at\")",
+      "create index \"telescope_entries_type_should_display_on_index_index\" on \"telescope_entries\" (\"type\", \"should_display_on_index\")",
+      "create index \"telescope_entries_tags_tag_index\" on \"telescope_entries_tags\" (\"tag\")",
+      "alter table \"compliance_batch_forms\" add column \"updated_at\" datetime",
+      "alter table \"incidents\" add column \"employee_id\" integer",
+      "alter table \"incidents\" add column \"notice_date\" date",
+      "alter table \"incidents\" add column \"notice_time\" time",
+      "alter table \"incidents\" add column \"incident_time\" time",
+      "alter table \"incidents\" add column \"location\" varchar",
+      "alter table \"incidents\" add column \"cause\" text",
+      "alter table \"incidents\" add column \"injury_type\" varchar",
+      "alter table \"incidents\" add column \"activity\" text",
+      "alter table \"incidents\" add column \"first_aid_by\" varchar",
+      "alter table \"incidents\" add column \"witness\" text",
+      "alter table \"incidents\" add column \"remarks\" text",
+      "create index \"workforce_deductions_tenant_id_branch_id_deduction_date_index\" on \"workforce_deductions\" (\"tenant_id\", \"branch_id\", \"deduction_date\")",
+      "create index \"workforce_deductions_employee_id_deduction_date_index\" on \"workforce_deductions\" (\"employee_id\", \"deduction_date\")",
+      "create index \"workforce_fines_tenant_id_branch_id_fine_date_index\" on \"workforce_fines\" (\"tenant_id\", \"branch_id\", \"fine_date\")",
+      "create index \"workforce_fines_employee_id_fine_date_index\" on \"workforce_fines\" (\"employee_id\", \"fine_date\")",
+      "create index \"workforce_advances_tenant_id_branch_id_advance_date_index\" on \"workforce_advances\" (\"tenant_id\", \"branch_id\", \"advance_date\")",
+      "create index \"workforce_advances_employee_id_advance_date_index\" on \"workforce_advances\" (\"employee_id\", \"advance_date\")",
+      "alter table \"contract_labour_deployment\" add column \"nature_of_work\" varchar",
+      "alter table \"contract_labour_deployment\" add column \"work_location\" varchar",
+      "alter table \"contract_labour_deployment\" add column \"termination_reason\" varchar",
+      "create index \"employee_leave_tenant_id_branch_id_index\" on \"employee_leave\" (\"tenant_id\", \"branch_id\")",
+      "create index \"holidays_tenant_id_branch_id_index\" on \"holidays\" (\"tenant_id\", \"branch_id\")",
+      "create index \"hazard_register_tenant_id_branch_id_index\" on \"hazard_register\" (\"tenant_id\", \"branch_id\")",
+      "create index \"employee_financial_register_tenant_id_branch_id_index\" on \"employee_financial_register\" (\"tenant_id\", \"branch_id\")",
+      "alter table \"__temp__compliance_batch_forms\" rename to \"compliance_batch_forms\"",
+      "alter table \"__temp__compliance_batch_forms\" rename to \"compliance_batch_forms\"",
+      "alter table \"__temp__compliance_manual_batch_items\" rename to \"compliance_manual_batch_items\"",
+      "alter table \"compliance_manual_batch_items\" add column \"compliance_result\" varchar check (\"compliance_result\" in ('compliant', 'not_applicable'))",
+      "alter table \"compliance_manual_batch_items\" add column \"uploaded_at\" datetime",
+      "alter table \"compliance_manual_batch_items\" add column \"uploaded_by\" integer",
+      "alter table \"__temp__compliance_manual_batch_items\" rename to \"compliance_manual_batch_items\"",
+      "alter table \"compliance_manual_batch_items\" add column \"file_size\" integer",
+      "create index \"idx_manual_items_tenant_branch_batch\" on \"compliance_manual_batch_items\" (\"tenant_id\", \"branch_id\", \"batch_id\")",
+      "alter table \"compliance_manual_master\" add column \"is_automatable\" tinyint(1) not null default '0'",
+      "alter table \"users\" add column \"branch_id\" integer"
+    ]
+  }
+}

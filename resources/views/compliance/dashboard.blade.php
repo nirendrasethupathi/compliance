@@ -60,6 +60,7 @@
 
 @push('scripts')
     <script>
+    (function () {
         const SUBSCRIPTION = '{{ $subscription ?? 'MINIMAL' }}';
         const IS_FULL = SUBSCRIPTION === 'FULL';
 
@@ -1154,5 +1155,6 @@
             ManualPanel.init(batchId);
             await _origProcessBatch(batchId);
         };
+    })();
     </script>
 @endpush
